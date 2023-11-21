@@ -1,0 +1,46 @@
+header {
+  background-color: #F7F7F7;
+  @include flex(row, space-around, center, wrap);
+  padding: 1rem;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+  nav {
+    @include flex(row, space-around, center, wrap);
+
+    ul {
+      @include flex(row, space-between, center, wrap);
+      list-style: none;
+
+      li {
+
+        a {
+          text-decoration: none;
+          color: $text-color;
+          text-transform: uppercase;
+          padding: 1rem;
+          @include animate(all, 0.3s);
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  background-color: $quaternary-color;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  padding: 15px 0;
+  p {
+    color: $second-text-color;
+  }
+}

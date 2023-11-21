@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+/*VARIABLES*/
+$main-font: 'Roboto', sans-serif;
+$text-size: 14px;
+$titles-size: 35px;
+
+$primary-color: #ed4f2e;
+$secondary-color: #ffffff;
+$tertiary-color: #ebebeb;
+$quaternary-color: #1f2c33;
+
+$text-color: $quaternary-color;
+$second-text-color: $secondary-color;
+
+$base-spacing: 1em;
+$small-spacing: 0.5em;
+$large-spacing: 2em;
+
+$side-padding: 200px;
+
+/*--------------------*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  font-family: $main-font;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  @include flex(column, center, center, nowrap);
+}

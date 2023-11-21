@@ -1,0 +1,41 @@
+main {
+  height: auto;
+  width: 100%;
+  @include flex(column, center, center, nowrap);
+  flex: 1;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $primary-color;
+  margin-bottom: $base-spacing;
+
+  span {
+    &:first-child {
+      color: $quaternary-color;
+      font-weight: bolder;
+    }
+    &:last-child {
+      background-color: orange;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      color: $quaternary-color;
+    }
+  }
+}
+
+.span1 {
+  &:first-child {
+    color: $quaternary-color;
+    font-weight: bolder;
+  }
+
+}
+
+.span2 {
+  background-color: orange;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: $quaternary-color;
+}

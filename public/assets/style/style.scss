@@ -1,10 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-
-header {
-  background-color: #3b82f6;
-}
+@import 'mixins';
+@import 'global';
+@import 'layout';
+@import 'home';
