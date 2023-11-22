@@ -42,7 +42,7 @@ class ConnexionController extends AbstractController
                 $this->addFlash('success', 'Login successful!');
                 $this->addFlash('script', $script);
                 sleep(1.5); // Add a 3-second delay
-                return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('app_connexion');
             } else {
                 $this->addFlash('error', 'Invalid credentials!');
             }

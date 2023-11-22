@@ -7,7 +7,10 @@
 <main>
     <div class="card">
         <h1>Traveaux</h1>
-
+    <h1>{% if app.session.get('email') is defined %}
+        <p>Email enregistré en session : {{ app.session.get('email') }}</p>
+    {% endif %}
+    </h1>
         <form>
             Nom
             <input type="text" id="nom">

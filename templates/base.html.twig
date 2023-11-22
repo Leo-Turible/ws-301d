@@ -16,7 +16,6 @@
 <header>
     <a>
         <span class="span1">DeadLine</span> <span class="span2">Hub</span>
-        <!--<img src="{{ asset('images/logo.png') }}" alt="logo">-->
     </a>
 
     <nav>
@@ -28,8 +27,13 @@
     </nav>
 
     <a>
-        <img src="{{ asset('images/logo.png') }}" alt="Profile">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="Profile">
     </a>
+    {% if app.session.get('user_email') is defined %}
+    L'e-mail de l'utilisateur est : {{ app.session.get('user_email') }}
+{% else %}
+    Aucun e-mail enregistré en session.
+{% endif %}
 </header>
 
 {% block body %}{% endblock %}

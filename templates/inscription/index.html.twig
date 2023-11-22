@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InscriptionController!{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     <main>
-        <div class="card">
+        <h1>Inscription</h1>
 
-        </div
+        <div class="card">
+            <form action="{{ path('app_inscription') }}" method="post">
+                <label for="inputEmail">Email</label>
+                <input type="email" id="inputEmail" name="_email" required autofocus>
+
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" id="inputPassword" name="_password" required>
+
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
     </main>
 {% endblock %}
