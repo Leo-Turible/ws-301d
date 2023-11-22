@@ -22,7 +22,5 @@ app_inscription:
 app_profil:
     path: /profil
     controller: App\Controller\ProfilController::index
-    # Ensure that only authenticated users with ROLE_USER can access the profile
-    # Uncomment the following lines if you're using Symfony 5.3 or later
     # requirements:
     #     _role: 'ROLE_USER'

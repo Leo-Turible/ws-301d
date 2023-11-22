@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ConnexionController extends AbstractController
 {
@@ -43,7 +44,7 @@ class ConnexionController extends AbstractController
 
                 $this->addFlash('success', 'Login successful!');
                 sleep(1.5); // Add a 3-second delay
-                return $this->redirectToRoute('app_traveaux');
+                return $this->redirectToRoute('app_profil');
             } else {
                 $this->addFlash('error', 'Invalid credentials!');
             }
@@ -54,15 +55,18 @@ class ConnexionController extends AbstractController
             'last_username' => $lastUsername,
         ]);
     }
-   
+
     private function validateCredentials($enteredEmail, $enteredPassword)
     {
         // Load user data from the JSON file
         $users = $this->loadUsersFromJson();
 
         // Validate the entered credentials against users from the JSON file
-        foreach ($users as $user) {
+        foreach ($users as &$user) {
             if ($enteredEmail === $user['email'] && $enteredPassword === $user['password']) {
+                $user['roles'] = ['ROLE_USER'];
+                
+                // $this->saveUsersToJson($users);
                 return true;
             }
         }
@@ -70,9 +74,19 @@ class ConnexionController extends AbstractController
         return false;
     }
 
+
     private function loadUsersFromJson()
     {
         $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/users.json');
         return $this->serializer->decode($jsonContent, 'json');
     }
+
+    // private function saveUsersToJson($users)
+    // {
+    //     // Encoder les utilisateurs au format JSON
+    //     $jsonContent = $this->serializer->encode($users, 'json');
+
+    //     // Sauvegarder le contenu JSON dans le fichier
+    //     file_put_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/users.json', $jsonContent);
+    // }
 }
