@@ -22,11 +22,15 @@ class InscriptionController extends AbstractController
     {
         // Handle the form submission for user registration
         if ($request->isMethod('POST')) {
+            $firstName = $request->request->get('_firstName');
+            $lastName = $request->request->get('_lastName');
             $email = $request->request->get('_email');
             $password = $request->request->get('_password');
+            $tp = $request->request->get('_tp');
+            $year = $request->request->get('_year');
 
             // Validate and insert the user data into the JSON file
-            $this->registerUser($email, $password);
+            $this->registerUser($firstName, $lastName, $email, $password, $tp, $year);
 
             // You may redirect to a login page or any other page after successful registration
             return $this->redirectToRoute('app_connexion');
@@ -37,15 +41,19 @@ class InscriptionController extends AbstractController
         ]);
     }
 
-    private function registerUser($email, $password)
+    private function registerUser($firstName, $lastName, $email, $password, $tp, $year)
     {
         // Load existing users from the JSON file
         $users = $this->loadUsersFromJson();
 
         // Add the new user to the array
         $newUser = [
+            'firstName' => $firstName,
+            'lastName' => $lastName,
             'email' => $email,
             'password' => $password,
+            'tp' => $tp,
+            'year' => $year,
         ];
 
         $users[] = $newUser;

@@ -26,13 +26,11 @@
         </ul>
     </nav>
 
-    <a>
-        <img src="{{ asset('assets/images/logo.png') }}" alt="Profile">
-    </a>
-    {% if app.session.get('user_email') is defined %}
-    L'e-mail de l'utilisateur est : {{ app.session.get('user_email') }}
+    
+   {% if app.session.get('user_email') is defined %}
+   <p> L'e-mail de l'utilisateur est : {{ app.session.get('user_email') }}</p>
 {% else %}
-    Aucun e-mail enregistré en session.
+    <p>Aucun e-mail enregistré en session.</p>
 {% endif %}
 </header>
 

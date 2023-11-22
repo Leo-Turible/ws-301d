@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ConnexionController extends AbstractController
 {
@@ -19,7 +20,7 @@ class ConnexionController extends AbstractController
     }
 
     #[Route('/connexion', name: 'app_connexion')]
-    public function index(Request $request, AuthenticationUtils $authenticationUtils): Response
+    public function index(Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $session): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -37,12 +38,12 @@ class ConnexionController extends AbstractController
             $isValid = $this->validateCredentials($email, $password);
 
             if ($isValid) {
-                // Save the email in the local storage
-                $script = '<script>localStorage.setItem("email", "' . $email . '");</script>';
+                // Save the email in the session
+                $session->set('user_email', $email);
+
                 $this->addFlash('success', 'Login successful!');
-                $this->addFlash('script', $script);
                 sleep(1.5); // Add a 3-second delay
-                return $this->redirectToRoute('app_connexion');
+                return $this->redirectToRoute('app_traveaux');
             } else {
                 $this->addFlash('error', 'Invalid credentials!');
             }
@@ -53,7 +54,7 @@ class ConnexionController extends AbstractController
             'last_username' => $lastUsername,
         ]);
     }
-
+   
     private function validateCredentials($enteredEmail, $enteredPassword)
     {
         // Load user data from the JSON file

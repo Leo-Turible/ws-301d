@@ -8,11 +8,39 @@
 
         <div class="card">
             <form action="{{ path('app_inscription') }}" method="post">
+                <label for="inputFirstName">Prénom</label>
+                <input type="text" id="inputFirstName" name="_firstName" required>
+
+                <label for="inputLastName">Nom</label>
+                <input type="text" id="inputLastName" name="_lastName" required>
+
                 <label for="inputEmail">Email</label>
                 <input type="email" id="inputEmail" name="_email" required autofocus>
 
                 <label for="inputPassword">Mot de passe</label>
                 <input type="password" id="inputPassword" name="_password" required>
+
+                <label for="inputTP">TP</label>
+                <select id="inputTP" name="_tp" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                </select>
+
+                <label for="inputYear">Année</label>
+                <select id="inputYear" name="_year" required>
+                    <option value="BUT Semestre 1">BUT Semestre 1</option>
+                    <option value="BUT Semestre 2">BUT Semestre 2</option>
+                    <option value="BUT Semestre 3">BUT Semestre 3</option>
+                    <option value="BUT Semestre 4">BUT Semestre 4</option>
+                    <option value="BUT Semestre 5">BUT Semestre 5</option>
+                    <option value="BUT Semestre 6">BUT Semestre 6</option>
+                </select>
 
                 <button type="submit">S'inscrire</button>
             </form>
