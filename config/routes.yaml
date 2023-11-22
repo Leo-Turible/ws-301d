@@ -3,3 +3,26 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# Login
+app_connexion:
+    path: /connexion
+    controller: App\Controller\ConnexionController::index
+
+# Logout
+# app_logout:
+#     path: /logout
+
+# Registration
+app_inscription:
+    path: /inscription
+    controller: App\Controller\InscriptionController::index
+
+# Profile
+app_profil:
+    path: /profil
+    controller: App\Controller\ProfilController::index
+    # Ensure that only authenticated users with ROLE_USER can access the profile
+    # Uncomment the following lines if you're using Symfony 5.3 or later
+    # requirements:
+    #     _role: 'ROLE_USER'

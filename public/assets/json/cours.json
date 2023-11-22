@@ -1,0 +1,102 @@
+[
+    {
+        "module": "WS301D",
+        "nomCours": "Développer des parcours utilisateur au sein d'un système d'information"
+    },
+    {
+        "module": "WS302D",
+        "nomCours": "Produire des contenus pour une communication plurimédia"
+    },
+    {
+        "module": "WS303D",
+        "nomCours": "Concevoir des visualisations de données pour le web et une application interactive"
+    },
+    {
+        "module": "WS310",
+        "nomCours": "Portfolio"
+    },
+    {
+        "module": "WS3Bonif",
+        "nomCours": "Bonification (PAC, sport, RI, engagement étudiant,...)"
+    },
+    {
+        "module": "WS3Cordées",
+        "nomCours": "Cordées de la réussite"
+    },
+    {
+        "module": "WR301",
+        "nomCours": "Anglais"
+    },
+    {
+        "module": "WR302",
+        "nomCours": "Anglais Renforcé ou LV2"
+    },
+    {
+        "module": "WR303",
+        "nomCours": "Design d'expérience"
+    },
+    {
+        "module": "WR304",
+        "nomCours": "Culture numérique"
+    },
+    {
+        "module": "WR305D",
+        "nomCours": "Stratégies de communication et marketing"
+    },
+    {
+        "module": "WR306",
+        "nomCours": "Référencement"
+    },
+    {
+        "module": "WR307",
+        "nomCours": "Expression, communication et rhétorique"
+    },
+    {
+        "module": "WR308",
+        "nomCours": "Écriture multimédia et narration"
+    },
+    {
+        "module": "WR309D",
+        "nomCours": "Création et design interactif (UI)"
+    },
+    {
+        "module": "WR310",
+        "nomCours": "Culture artistique"
+    },
+    {
+        "module": "WR311",
+        "nomCours": "Audiovisuel et Motion design"
+    },
+    {
+        "module": "WR312",
+        "nomCours": "Développement Front et intégration"
+    },
+    {
+        "module": "WR313D",
+        "nomCours": "Développement Back"
+    },
+    {
+        "module": "WR314",
+        "nomCours": "Déploiement de services"
+    },
+    {
+        "module": "WR315",
+        "nomCours": "Représentation et traitement de l'information"
+    },
+    {
+        "module": "WR316",
+        "nomCours": "Gestion de projet"
+    },
+    {
+        "module": "WR317",
+        "nomCours": "Economie, gestion et droit du numérique"
+    },
+    {
+        "module": "WR318",
+        "nomCours": "Projet Personnel et Professionnel"
+    },
+    {
+        "module": "WR319D",
+        "nomCours": "Symfony"
+    }
+]

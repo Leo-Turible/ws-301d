@@ -80,6 +80,9 @@ header nav ul li a {
 header nav ul li a:hover {
   color: rgb(225, 57, 16);
 }
+header a {
+  text-decoration: none;
+}
 header a:last-child img {
   width: 50px;
   height: 50px;

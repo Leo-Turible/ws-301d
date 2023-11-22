@@ -34,6 +34,7 @@
 
                     <button type="submit">Connexion</button>
                 </form>
+                <p> Pas encore inscrit ? <a href="{{ path('app_inscription') }}">Inscrivez-vous</a></p>
             </div>
 
             {% for flashMessage in app.flashes('script') %}
