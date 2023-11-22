@@ -9,3 +9,34 @@
 @mixin animate($property, $duration, $timing-function: ease) {
   transition: $property $duration $timing-function;
 }
+
+@mixin btn($color, $border-color) {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $color;
+  
+  border: 2px solid $border-color;
+  border-radius: 15px;
+  
+  @include animate(all, 0.3s);
+
+  @if $color == $primary-color {
+      padding: 5px 35px;
+      font-size: 1.2rem;
+  } @else {
+      padding: 15px 35px;
+      font-size: $text-size;
+  }
+
+  &:hover {
+      @if $color == $primary-color {
+          background-color: $secondary-color;
+          color: $primary-color;
+          border-color: $secondary-color;
+      } @else {
+          background-color: $tertiary-color;
+          color: $quaternary-color;
+          border-color: transparent;
+      }
+  }
+}

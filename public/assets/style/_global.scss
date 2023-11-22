@@ -1,17 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 /*VARIABLES*/
-$main-font: 'Roboto', sans-serif;
+$main-font: 'Outfit', sans-serif;
+$second-font: 'Montserrat', sans-serif;
 $text-size: 14px;
 $titles-size: 35px;
 
-$primary-color: #ed4f2e;
-$secondary-color: #ffffff;
-$tertiary-color: #ebebeb;
+$primary-color: #7F7F7F;
+$secondary-color: #B4B4B4;
+$tertiary-color: #F7F7F7;
 $quaternary-color: #1f2c33;
+$quinary-color: rgb(225, 57, 16);
+
 
 $text-color: $quaternary-color;
-$second-text-color: $secondary-color;
+$second-text-color: $quaternary-color;
 
 $base-spacing: 1em;
 $small-spacing: 0.5em;
@@ -37,7 +41,20 @@ body {
   font-family: $main-font;
   font-size: 16px;
   line-height: 1.5;
-  color: #333;
+  color: $tertiary-color;
   background-color: #fff;
   @include flex(column, center, center, nowrap);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $main-font;
+  font-weight: 700;
+  color: $quaternary-color;
+}
+
+p {
+  font-size: $text-size;
+  font-weight: 400;
+  color: $text-color;
+  font-family: $second-font;
 }

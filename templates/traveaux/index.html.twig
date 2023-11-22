@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TraveauxController!{% endblock %}
+
+{% block body %}
+
+<main>
+    <div class="card">
+        <h1>Traveaux</h1>
+
+        <form>
+            Nom
+            <input type="text" id="nom">
+            Prix
+            <input type="text" id="prix">
+            <button id="ajouter">Ajouter</button>
+        </form>
+    </div>
+
+    <div id="panier">
+    
+    </div>
+</main>
+    {% block javascripts %}
+        <script src="{{ asset('assets/js/traveaux.js') }}"></script>
+    {% endblock %}
+{% endblock %}

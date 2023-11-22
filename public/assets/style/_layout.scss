@@ -26,7 +26,7 @@ header {
           @include animate(all, 0.3s);
 
           &:hover {
-            color: $primary-color;
+            color: $quinary-color;
           }
         }
       }
@@ -40,6 +40,7 @@ footer {
   text-align: center;
   margin-top: auto;
   padding: 15px 0;
+
   p {
     color: $second-text-color;
   }

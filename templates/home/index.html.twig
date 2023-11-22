@@ -1,11 +1,23 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/style/style.css') }}">
+    {% endblock %}
 
-{% block title %}ACCUEIL{% endblock %}
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>          
+<div id="header_image">
+        <div id="header_text">
+            <h1>Bienvenue sur <span>DeadLine</span> <span class="span2">Hub</span> ! </h1> 
+            <h4>L’agenda en ligne pour les étudiants fais par des étudiants.</h4> 
+            <a class='button' href="/connexion">Connexion</a>
+        </div>
+</div>
 
-{% block body %}
-    <main>
-        <h1>
-            Bienvenue sur <span>DeadLine</span> <span>Hub</span> !
-        </h1>
-    </main>
-{% endblock %}
