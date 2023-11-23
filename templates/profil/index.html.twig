@@ -11,19 +11,19 @@
         
         {% if user %}
             {% if user.firstName is defined %}
-                <p><strong>Prénom:</strong> {{ user.firstName }}</p>
+                <p><strong>Prénom :</strong> {{ user.firstName }}</p>
             {% endif %}
             {% if user.lastName is defined %}
-                <p><strong>Nom:</strong> {{ user.lastName }}</p>
+                <p><strong>Nom :</strong> {{ user.lastName }}</p>
             {% endif %}
             {% if user.email is defined %}
-                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Email :</strong> {{ user.email }}</p>
             {% endif %}
             {% if user.tp is defined %}
-                <p><strong>TP:</strong> {{ user.tp }}</p>
+                <p><strong>TP :</strong> {{ user.tp }}</p>
             {% endif %}
             {% if user.year is defined %}
-                <p><strong>Année:</strong> {{ user.year }}</p>
+                <p><strong>Année :</strong> {{ user.year }}</p>
             {% endif %}
             <a href="{{ path('app_logout') }}">Déconnexion</a>
         {% else %}
