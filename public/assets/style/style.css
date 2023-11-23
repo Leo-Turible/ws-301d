@@ -80,12 +80,20 @@ header nav ul li a {
 header nav ul li a:hover {
   color: rgb(225, 57, 16);
 }
-header a {
+header > a {
   text-decoration: none;
 }
-header a:last-child img {
+header > a:last-child img {
   width: 50px;
   height: 50px;
+}
+header > a:first-child span {
+  color: #1f2c33;
+}
+header > a:first-child span:last-child {
+  background-color: orange;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 footer {
@@ -126,18 +134,6 @@ h1 span:last-child {
   color: #1f2c33;
 }
 
-.span1:first-child {
-  color: #F7F7F7;
-  font-weight: bolder;
-}
-
-.span2 {
-  background-color: orange;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  color: #1f2c33;
-}
-
 .card {
   max-width: 500px;
   width: 100%;
@@ -163,6 +159,59 @@ h1 span:last-child {
   background-color: #B4B4B4;
   border-radius: 10px;
   z-index: -1;
+}
+.card form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1em;
+}
+.card form input,
+.card form textarea {
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 10px;
+  background-color: #B4B4B4;
+  color: #1f2c33;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  outline: none;
+}
+.card form input::placeholder,
+.card form textarea::placeholder {
+  color: #1f2c33;
+}
+.card form input:focus,
+.card form textarea:focus {
+  background-color: #F7F7F7;
+  box-shadow: inset 5px -5px 15px 1px #1f2c33;
+}
+.card form textarea {
+  resize: none;
+  height: 200px;
+}
+.card form button {
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 10px;
+  background-color: #F7F7F7;
+  color: #1f2c33;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  outline: none;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+}
+.card form button:hover {
+  background-color: #1f2c33;
+  color: #F7F7F7;
 }
 
 /*PAGE ACCUEIL*/

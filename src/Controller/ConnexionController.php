@@ -64,7 +64,7 @@ class ConnexionController extends AbstractController
         // Validate the entered credentials against users from the JSON file
         foreach ($users as &$user) {
             if ($enteredEmail === $user['email'] && $enteredPassword === $user['password']) {
-                $user['roles'] = ['ROLE_USER'];
+                // $user['roles'] = ['ROLE_USER'];
                 
                 // $this->saveUsersToJson($users);
                 return true;
