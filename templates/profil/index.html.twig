@@ -1,16 +1,31 @@
+{# templates/profil/index.html.twig #}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-    <main>
-        <div class="card">
-            <h1>Profil</h1>
+    <h1>Profil</h1>
+    
+    {% if user %}
+        {% if user.firstName is defined %}
             <p><strong>Prénom:</strong> {{ user.firstName }}</p>
+        {% endif %}
+        {% if user.lastName is defined %}
             <p><strong>Nom:</strong> {{ user.lastName }}</p>
+        {% endif %}
+        {% if user.email is defined %}
             <p><strong>Email:</strong> {{ user.email }}</p>
+        {% endif %}
+        {% if user.tp is defined %}
             <p><strong>TP:</strong> {{ user.tp }}</p>
+        {% endif %}
+        {% if user.year is defined %}
             <p><strong>Année:</strong> {{ user.year }}</p>
-        </div>
-    </main>
+        {% endif %}
+    {% else %}
+        <p>Profil non disponible.</p>
+    {% endif %}
+    
+    <a href="{{ path('app_connexion') }}">Se déconnecter</a>
 {% endblock %}
