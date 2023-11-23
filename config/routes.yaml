@@ -9,9 +9,9 @@ app_connexion:
     path: /connexion
     controller: App\Controller\ConnexionController::index
 
-# Logout
-# app_logout:
-#     path: /logout
+app_logout:
+    path: '/logout'
+    controller: App\Controller\ConnexionController::logout
 
 # Registration
 app_inscription:

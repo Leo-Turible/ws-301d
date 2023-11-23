@@ -22,16 +22,20 @@
         <ul>
             <li><a href="{{ path('app_home') }}">Filtrer</a></li>
             <li><a href="{{ path('app_home') }}">Ajouter</a></li>
-            <li><a href="{{ path('app_home') }}">Travaux</a></li>
+            <li><a href="{{ path('app_traveaux') }}">Travaux</a></li>
         </ul>
     </nav>
 
     
-   {% if app.session.get('user_email') is defined %}
-   <p> L'e-mail de l'utilisateur est : {{ app.session.get('user_email') }}</p>
-{% else %}
-    <p>Aucun e-mail enregistré en session.</p>
-{% endif %}
+    {% if app.session.get('user_email') is not empty %}
+        <p>Bonjour {{ app.session.get('user_first_name') }} {{ app.session.get('user_last_name') }} !</p>
+        <a href="{{ path('app_logout') }}">Déconnexion</a>
+    {% else %}
+        <p>Aucun utilisateur connecté.</p>
+    {% endif %}
+
+
+
 </header>
 
 {% block body %}{% endblock %}

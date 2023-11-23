@@ -29,11 +29,9 @@ class ConnexionController extends AbstractController
             $email = $request->request->get('_email');
             $password = $request->request->get('_password');
 
-            $isValid = $this->validateCredentials($email, $password);
+            $isValid = $this->validateCredentials($email, $password, $session);
 
             if ($isValid) {
-                $session->set('user_email', $email);
-
                 $this->addFlash('success', 'Login successful!');
                 sleep(1.5);
                 return $this->redirectToRoute('app_profil');
@@ -48,13 +46,17 @@ class ConnexionController extends AbstractController
         ]);
     }
 
-    private function validateCredentials($enteredEmail, $enteredPassword)
+    private function validateCredentials($enteredEmail, $enteredPassword, $session)
     {
         $users = $this->loadUsersFromJson();
 
-        foreach ($users as &$user) {
+        foreach ($users as $user) {
             if ($enteredEmail === $user['email'] && $enteredPassword === $user['password']) {
-                
+                // Stocker les informations de l'utilisateur dans la session
+                $session->set('user_email', $user['email']);
+                $session->set('user_first_name', $user['firstName']);
+                $session->set('user_last_name', $user['lastName']);
+
                 return true;
             }
         }
@@ -66,5 +68,11 @@ class ConnexionController extends AbstractController
     {
         $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/users.json');
         return $this->serializer->decode($jsonContent, 'json');
+    }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout()
+    {
+        // La méthode n'a pas besoin de contenu ici.
     }
 }

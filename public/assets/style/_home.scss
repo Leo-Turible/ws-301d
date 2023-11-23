@@ -171,6 +171,58 @@ h4{
 
 /*--------------------*/
 
+/*PAGE PASSWORD*/
+
+.bloc {
+	background-color: $quinary-color;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: -11px 7px 0px rgba(0, 0, 0, 1);
+	width: 450px;
+	height: 500px;
+	color: $tertiary-color;
+  margin-top: 27px;
+  
+  h1{
+    color: $tertiary-color
+  }
+  .bloc__titre {
+    text-align: center;
+    margin-bottom: 65px;
+
+  }
+  label {
+    display: block;
+    margin-bottom: 15px;
+  }
+  input[type="email"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 200px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  input[type="submit"] {
+    background-color: $secondary-color;
+    color: $tertiary-color;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: calc(100% - 22px);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+}
+
+
+/*--------------------*/
+
+
 
 /*PAGE CONTACT*/
 

@@ -294,6 +294,52 @@ h4 {
 }
 
 /*--------------------*/
+/*PAGE PASSWORD*/
+.bloc {
+  background-color: rgb(225, 57, 16);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: -11px 7px 0px rgb(0, 0, 0);
+  width: 450px;
+  height: 500px;
+  color: #F7F7F7;
+  margin-top: 27px;
+}
+.bloc h1 {
+  color: #F7F7F7;
+}
+.bloc .bloc__titre {
+  text-align: center;
+  margin-bottom: 65px;
+}
+.bloc label {
+  display: block;
+  margin-bottom: 15px;
+}
+.bloc input[type=email] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 200px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.bloc input[type=submit] {
+  background-color: #B4B4B4;
+  color: #F7F7F7;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: calc(100% - 22px);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.bloc input[type=submit]:hover {
+  background-color: #7F7F7F;
+}
+
+/*--------------------*/
 /*PAGE CONTACT*/
 /*--------------------*/
 
