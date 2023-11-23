@@ -40,6 +40,12 @@ p {
   font-family: "Montserrat", sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: #1f2c33;
+  transition: all 0.3s ease-in-out;
+}
+
 header {
   background-color: #F7F7F7;
   display: flex;
@@ -104,7 +110,7 @@ footer {
   padding: 15px 0;
 }
 footer p {
-  color: #1f2c33;
+  color: #B4B4B4;
 }
 
 main {
@@ -143,6 +149,7 @@ h1 span:last-child {
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  gap: 35px;
   background-color: #7F7F7F;
   border-radius: 10px;
   padding: 1em;
@@ -161,7 +168,7 @@ h1 span:last-child {
   z-index: -1;
 }
 .card form {
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -181,6 +188,7 @@ h1 span:last-child {
   font-weight: 700;
   letter-spacing: 1px;
   outline: none;
+  transition: ease-out 0.5s;
 }
 .card form input::placeholder,
 .card form textarea::placeholder {
@@ -189,7 +197,8 @@ h1 span:last-child {
 .card form input:focus,
 .card form textarea:focus {
   background-color: #F7F7F7;
-  box-shadow: inset 5px -5px 15px 1px #1f2c33;
+  -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
 }
 .card form textarea {
   resize: none;
@@ -212,6 +221,12 @@ h1 span:last-child {
 .card form button:hover {
   background-color: #1f2c33;
   color: #F7F7F7;
+}
+.card a {
+  font-weight: 700;
+}
+.card a:hover {
+  color: rgb(225, 57, 16);
 }
 
 /*PAGE ACCUEIL*/
@@ -349,12 +364,16 @@ h4 {
   background-color: #ebebeb;
 }
 
-.fc .fc-daygrid-day-number {
-  color: #1f2c33 !important;
-}
-
 .fc th {
   background-color: #1f2c33 !important;
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: white;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #1f2c33 !important;
 }
 
 .fc .fc-daygrid-day.fc-day-today {

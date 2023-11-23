@@ -43,6 +43,13 @@ class InscriptionController extends AbstractController
 
     private function registerUser($firstName, $lastName, $email, $password, $tp, $year)
     {
+        // Vérifie si l'e-mail se termine par "@etudiant.univ-reims.fr"
+        if (substr($email, -23) !== "@etudiant.univ-reims.fr") {
+            // Ajoute un message d'erreur si l'e-mail n'est pas valide
+            $this->addFlash('error', 'Adresse e-mail non autorisée.');
+            return;
+        }
+
         // Load existing users from the JSON file
         $users = $this->loadUsersFromJson();
 
@@ -60,7 +67,11 @@ class InscriptionController extends AbstractController
 
         // Save the updated users array back to the JSON file
         $this->saveUsersToJson($users);
+
+        // Ajoute un message de succès si l'inscription est réussie
+        $this->addFlash('success', 'Inscription réussie. Vous pouvez maintenant vous connecter.');
     }
+
 
     private function loadUsersFromJson()
     {

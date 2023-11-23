@@ -51,18 +51,27 @@ class ConnexionController extends AbstractController
         $users = $this->loadUsersFromJson();
 
         foreach ($users as $user) {
+            // Vérifie si l'e-mail et le mot de passe correspondent
             if ($enteredEmail === $user['email'] && $enteredPassword === $user['password']) {
-                // Stocker les informations de l'utilisateur dans la session
-                $session->set('user_email', $user['email']);
-                $session->set('user_first_name', $user['firstName']);
-                $session->set('user_last_name', $user['lastName']);
 
-                return true;
+                // Vérifie si l'e-mail se termine par "@etudiant.univ-reims.fr"
+                if (substr($enteredEmail, -23) === "@etudiant.univ-reims.fr") {
+                    // Stocke les informations de l'utilisateur dans la session
+                    $session->set('user_email', $user['email']);
+                    $session->set('user_first_name', $user['firstName']);
+                    $session->set('user_last_name', $user['lastName']);
+
+                    return true;
+                } else {
+                    // Ajoute un message d'erreur si l'e-mail n'est pas valide
+                    $this->addFlash('error', 'Adresse e-mail non autorisée.');
+                }
             }
         }
 
         return false;
     }
+
 
     private function loadUsersFromJson()
     {

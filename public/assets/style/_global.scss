@@ -15,7 +15,7 @@ $quinary-color: rgb(225, 57, 16);
 
 $title-color: $tertiary-color;
 $text-color: $quaternary-color;
-$second-text-color: $quaternary-color;
+$second-text-color: $secondary-color;
 
 $base-spacing: 1em;
 $small-spacing: 0.5em;
@@ -57,4 +57,10 @@ p {
   font-weight: 400;
   color: $text-color;
   font-family: $second-font;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+  transition: all 0.3s ease-in-out;
 }

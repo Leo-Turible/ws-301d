@@ -30,6 +30,7 @@ h1 {
   width: 100%;
   height: auto;
   @include flex(column, center, center, nowrap);
+  gap: 35px;
   background-color: $primary-color;
   border-radius: 10px;
   padding: $base-spacing;
@@ -49,7 +50,7 @@ h1 {
   }
 
   form {
-    width: 60%;
+    width: 70%;
     @include flex(column, center, center, nowrap);
     gap: $base-spacing;
 
@@ -65,6 +66,7 @@ h1 {
       font-weight: 700;
       letter-spacing: 1px;
       outline: none;
+      transition: ease-out 0.5s;
 
       &::placeholder {
         color: $quaternary-color;
@@ -72,7 +74,8 @@ h1 {
 
       &:focus {
         background-color: $tertiary-color;
-        box-shadow: inset 5px -5px 15px 1px $quaternary-color;
+        -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
+        box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
       }
     }
 
@@ -101,7 +104,14 @@ h1 {
       }
     }
   }
-  
+
+  a {
+    font-weight: 700;
+    &:hover {
+      color: $quinary-color;
+    }
+  }
+
 }
 
 /*PAGE ACCUEIL*/
@@ -132,10 +142,11 @@ h1 {
   margin-top: 80px;
   @include flex(column, center, start, nowrap);
   gap: 15px;
-  
+
   a {
     @include btn($quaternary-color, $quinary-color);
   }
+
   .button {
     position: relative;
     display: inline-block;
@@ -144,7 +155,7 @@ h1 {
     font-size: $text-size;
     letter-spacing: 1px;
     text-decoration: none;
-    color:$tertiary-color;
+    color: $tertiary-color;
     background: transparent;
     cursor: pointer;
     transition: ease-out 0.5s;
@@ -152,17 +163,18 @@ h1 {
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 $tertiary-color;
   }
-  
+
   .button:hover {
     color: $quaternary-color;
     box-shadow: inset 0 -100px 0 0 $tertiary-color;
   }
-  
+
   .button:active {
     transform: scale(0.9);
   }
 }
-h4{
+
+h4 {
   color: $tertiary-color;
   letter-spacing: 1.5px;
 
@@ -174,27 +186,30 @@ h4{
 /*PAGE PASSWORD*/
 
 .bloc {
-	background-color: $quinary-color;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: -11px 7px 0px rgba(0, 0, 0, 1);
-	width: 450px;
-	height: 500px;
-	color: $tertiary-color;
+  background-color: $quinary-color;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: -11px 7px 0px rgba(0, 0, 0, 1);
+  width: 450px;
+  height: 500px;
+  color: $tertiary-color;
   margin-top: 27px;
-  
-  h1{
+
+  h1 {
     color: $tertiary-color
   }
+
   .bloc__titre {
     text-align: center;
     margin-bottom: 65px;
 
   }
+
   label {
     display: block;
     margin-bottom: 15px;
   }
+
   input[type="email"] {
     width: calc(100% - 22px);
     padding: 10px;
@@ -203,6 +218,7 @@ h4{
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
+
   input[type="submit"] {
     background-color: $secondary-color;
     color: $tertiary-color;
@@ -213,6 +229,7 @@ h4{
     border-radius: 10px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+
     &:hover {
       background-color: $primary-color;
     }
@@ -223,19 +240,25 @@ h4{
 /*--------------------*/
 
 /*PAGE CALENDRIER*/
-.fc-direction-ltr{
+.fc-direction-ltr {
   margin: 50px;
   width: 50%;
   border: 3px solid green;
   padding: 10px;
   background-color: #ebebeb;
 }
-  .fc .fc-daygrid-day-number {
-  color:$quaternary-color !important;
+.fc th {
+  background-color: $quaternary-color !important;
 }
-.fc th{
-background-color:$quaternary-color !important;
+.fc .fc-col-header-cell-cushion{
+  color: white;
 }
+.fc .fc-daygrid-day-number {
+  color: $quaternary-color !important;
+}
+
+
+
 .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(255, 255, 0, 0.578);
 }
