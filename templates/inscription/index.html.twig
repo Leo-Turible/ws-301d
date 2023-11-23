@@ -1,50 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block body %}
-    <main>
+	<main>
 
-        <div class="card">
-            <h1>Inscription</h1>
-            <form action="{{ path('app_inscription') }}" method="post">
-                <label for="inputFirstName">Prénom</label>
-                <input type="text" id="inputFirstName" name="_firstName" required>
+		<div class="card">
+			<h1>Inscription</h1>
+			<form id="form-inscription" action="{{ path('app_inscription') }}" method="post">
+				{# <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> #}
+				{# {{ form_row(form._token) }} Equivalent à la ligne ci-dessus #}
 
-                <label for="inputLastName">Nom</label>
-                <input type="text" id="inputLastName" name="_lastName" required>
+                <div class="form-group"> 
+                    <label for="inputFirstName">Prénom</label>
+					<input type="text" id="inputFirstName" name="_firstName" required>
+				</div>
 
-                <label for="inputEmail">Email</label>
-                <input type="email" id="inputEmail" name="_email" required autofocus>
+				<div class="form-group">
+					<label for="inputLastName">Nom</label>
+					<input type="text" id="inputLastName" name="_lastName" required>
+				</div>
 
-                <label for="inputPassword">Mot de passe</label>
-                <input type="password" id="inputPassword" name="_password" required>
+				<div class="form-group">
+					<label for="inputEmail">Email</label>
+					<input type="email" id="inputEmail" name="_email" required autofocus>
+				</div>
 
-                <label for="inputTP">TP</label>
-                <select id="inputTP" name="_tp" required>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                </select>
+				<div class="form-group">
+					<label for="inputPassword">Mot de passe</label>
+					<input type="password" id="inputPassword" name="_password" required>
+				</div>
 
-                <label for="inputYear">Année</label>
-                <select id="inputYear" name="_year" required>
-                    <option value="BUT Semestre 1">BUT Semestre 1</option>
-                    <option value="BUT Semestre 2">BUT Semestre 2</option>
-                    <option value="BUT Semestre 3">BUT Semestre 3</option>
-                    <option value="BUT Semestre 4">BUT Semestre 4</option>
-                    <option value="BUT Semestre 5">BUT Semestre 5</option>
-                    <option value="BUT Semestre 6">BUT Semestre 6</option>
-                </select>
+				<div class="form-group">
+					<label for="inputTP">TP</label>
+					<select id="inputTP" name="_tp" required>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+						<option value="D">D</option>
+						<option value="E">E</option>
+						<option value="F">F</option>
+						<option value="G">G</option>
+						<option value="H">H</option>
+					</select>
+				</div>
 
-                <button type="submit">S'inscrire</button>
-            </form>
-            <p> Déjà inscrit ? <a href="{{ path('app_connexion') }}">Se connecter</a></p>
-        </div>
-    </main>
+				<div class="form-group">
+					<label for="inputYear">Année</label>
+					<select id="inputYear" name="_year" required>
+						<option value="BUT Semestre 1">BUT Semestre 1</option>
+						<option value="BUT Semestre 2">BUT Semestre 2</option>
+						<option value="BUT Semestre 3">BUT Semestre 3</option>
+						<option value="BUT Semestre 4">BUT Semestre 4</option>
+						<option value="BUT Semestre 5">BUT Semestre 5</option>
+						<option value="BUT Semestre 6">BUT Semestre 6</option>
+					</select>
+				</div>
+
+				<button type="submit">S'inscrire</button>
+			</form>
+			<p>
+				Déjà inscrit ?
+				<a href="{{ path('app_connexion') }}">Se connecter</a>
+			</p>
+		</div>
+	</main>
 {% endblock %}

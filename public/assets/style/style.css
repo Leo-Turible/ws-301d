@@ -89,17 +89,62 @@ header nav ul li a:hover {
 header > a {
   text-decoration: none;
 }
-header > a:last-child img {
-  width: 50px;
-  height: 50px;
-}
-header > a:first-child span {
+header > a span {
   color: #1f2c33;
 }
-header > a:first-child span:last-child {
+header > a span:last-child {
   background-color: orange;
   padding: 0.5rem;
   border-radius: 0.5rem;
+}
+header #header__profil {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative;
+}
+header #header__profil .menu__wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1em;
+  position: absolute;
+  top: 130%;
+  right: 0;
+  width: auto;
+  height: 0;
+  background-color: #7F7F7F;
+  border-radius: 10px;
+  padding: 1em;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+header #header__profil .menu__wrap::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #B4B4B4;
+}
+header #header__profil .menu__wrap a {
+  color: #F7F7F7;
+}
+header #header__profil .menu__wrap a:hover {
+  color: rgb(225, 57, 16);
+}
+header #header__profil:hover .menu__wrap {
+  height: auto;
+  opacity: 1;
+  padding: 35px;
 }
 
 footer {
@@ -141,7 +186,7 @@ h1 span:last-child {
 }
 
 .card {
-  max-width: 500px;
+  max-width: 690px;
   width: 100%;
   height: auto;
   display: flex;
@@ -155,6 +200,9 @@ h1 span:last-child {
   padding: 1em;
   margin: 2em 0;
   position: relative;
+}
+.card p {
+  color: #F7F7F7;
 }
 .card::before {
   content: "";
@@ -176,29 +224,41 @@ h1 span:last-child {
   flex-wrap: nowrap;
   gap: 1em;
 }
+.card form .form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: nowrap;
+}
 .card form input,
-.card form textarea {
-  width: 100%;
+.card form textarea,
+.card form select {
+  width: auto;
   padding: 1em;
   border: none;
   border-radius: 10px;
-  background-color: #B4B4B4;
+  background-color: #7F7F7F;
   color: #1f2c33;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1px;
   outline: none;
-  transition: ease-out 0.5s;
+  border: 2px solid #F7F7F7;
+  transition: all ease-out 0.5s;
 }
 .card form input::placeholder,
-.card form textarea::placeholder {
-  color: #1f2c33;
+.card form textarea::placeholder,
+.card form select::placeholder {
+  color: #B4B4B4;
 }
 .card form input:focus,
-.card form textarea:focus {
+.card form textarea:focus,
+.card form select:focus {
   background-color: #F7F7F7;
   -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
   box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
+  border-color: transparent;
 }
 .card form textarea {
   resize: none;
@@ -382,6 +442,19 @@ h4 {
 
 /*--------------------*/
 /*PAGE CONTACT*/
+/*--------------------*/
+/*PAGE INSCRIPTION*/
+#form-inscription {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#form-inscription .form-group {
+  flex: 1 0 120px;
+}
+
 /*--------------------*/
 
 /*# sourceMappingURL=style.css.map */

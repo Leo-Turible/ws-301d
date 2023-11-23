@@ -1,48 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}CONNEXION
+{% endblock %}
 
 {% block body %}
-    <main>
-    <div class="card">
-        {% if app.user %}
-            {# Display welcome message if user is authenticated #}
-            <h1>Welcome, {{ app.user.email }}!</h1>
-            <a href="{{ path('app_logout') }}">Logout</a>
-        {% else %}
-            {# Display login form if user is not authenticated #}
-            <h1>Login</h1>
+	<main>
+		<div class="card">
+			{% if app.session.get('user_email') %}
+				{# Display welcome message if user is authenticated #}
+				<h1>Bienvenue,
+					{{ app.session.get('user_first_name') }}
+					!</h1>
+				<svg xmlns="http://www.w3.org/2000/svg" height="4em" viewbox="0 0 512 512" style="fill: #f7f7f7"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
+				<a href="{{ path('app_logout') }}">Déconnexion</a>
+                <meta http-equiv="refresh" content="2;url={{ path('app_calendrier') }}">
+			{% else %}
+				{# Display login form if user is not authenticated #}
+				<h1>Connexion</h1>
 
-            {% for flashMessage in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ flashMessage }}
-                </div>
-            {% endfor %}
+				{% for flashMessage in app.flashes('success') %}
+					<div class="alert alert-success">
+						{{ flashMessage }}
+					</div>
+					
+				{% endfor %}
 
-            {% for flashMessage in app.flashes('error') %}
-                <div class="alert alert-danger">
-                    {{ flashMessage }}
-                </div>
-            {% endfor %}
+				{% for flashMessage in app.flashes('error') %}
+					<div class="alert alert-danger">
+						{{ flashMessage }}
+					</div>
+				{% endfor %}
 
-            
-                <form action="{{ path('app_connexion') }}" method="post">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" id="inputEmail" name="_email" value="{{ last_username }}" placeholder="patricegommery@etudiant.univ-reims.fr" required autofocus>
+				<form action="{{ path('app_connexion') }}" method="post">
+					<div class="form-group">
+                        <label for="inputEmail">Email</label>
+					    <input type="email" id="inputEmail" name="_email" value="{{ last_username }}" placeholder="patricegommery@etudiant.univ-reims.fr" required autofocus>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inputPassword">Mot de passe</label>
+					    <input type="password" id="inputPassword" name="_password" required>
+                    </div>
 
-                    <label for="inputPassword">Mot de passe</label>
-                    <input type="password" id="inputPassword" name="_password" required>
-
-                    <button type="submit">Connexion</button>
-                </form>
-                <div>
-                    <p> Pas encore inscrit ? <a href="{{ path('app_inscription') }}">Inscrivez-vous</a></p>
-                    <p> Mot de passe oublié ? <a href="{{ path('app_password') }}">Réinitialisez-le</a></p>
-                </div>
-            {% for flashMessage in app.flashes('script') %}
-                {{ flashMessage|raw }}
-            {% endfor %}
-        {% endif %}
-        </div>
-    </main>
+					<button type="submit">Connexion</button>
+				</form>
+				<div>
+					<p>
+						Pas encore inscrit ?
+						<a href="{{ path('app_inscription') }}">Inscrivez-vous</a>
+					</p>
+					<p>
+						Mot de passe oublié ?
+						<a href="{{ path('app_password') }}">Réinitialisez-le</a>
+					</p>
+				</div>
+				{% for flashMessage in app.flashes('script') %}
+					{{ flashMessage|raw }}
+				{% endfor %}
+			{% endif %}
+		</div>
+	</main>
 {% endblock %}

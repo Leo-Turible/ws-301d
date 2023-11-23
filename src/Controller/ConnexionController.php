@@ -32,11 +32,12 @@ class ConnexionController extends AbstractController
             $isValid = $this->validateCredentials($email, $password, $session);
 
             if ($isValid) {
-                $this->addFlash('success', 'Login successful!');
-                sleep(1.5);
-                return $this->redirectToRoute('app_profil');
+                $this->addFlash('success', 'Connexion réussite !');
+                return $this->redirectToRoute('app_connexion');
+                // sleep(2);
+                // return $this->redirectToRoute('app_profil');
             } else {
-                $this->addFlash('error', 'Invalid credentials!');
+                $this->addFlash('error', 'Identification invalides !');
             }
         }
 
