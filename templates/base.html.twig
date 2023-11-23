@@ -5,12 +5,14 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block javascripts %}
+     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script src="{{ asset('assets/js/calendrier.js') }}"></script>
+{% endblock %}
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/style/style.css') }}">
     {% endblock %}
 
-    {% block javascripts %}
-    {% endblock %}
 </head>
 <body>
 <header>

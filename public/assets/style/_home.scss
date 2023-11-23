@@ -8,7 +8,7 @@ main {
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: $quinary-color;
+  color: $title-color;
 
   span {
     &:first-child {
@@ -33,7 +33,7 @@ h1 {
   background-color: $primary-color;
   border-radius: 10px;
   padding: $base-spacing;
-  margin-bottom: $base-spacing;
+  margin: $large-spacing 0;
   position: relative;
 
   &::before {
@@ -49,7 +49,7 @@ h1 {
   }
 
   form {
-    width: 100%;
+    width: 60%;
     @include flex(column, center, center, nowrap);
     gap: $base-spacing;
 
@@ -222,7 +222,26 @@ h4{
 
 /*--------------------*/
 
+/*PAGE CALENDRIER*/
+.fc-direction-ltr{
+  margin: 50px;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  background-color: #ebebeb;
+}
+  .fc .fc-daygrid-day-number {
+  color:$quaternary-color !important;
+}
+.fc th{
+background-color:$quaternary-color !important;
+}
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: rgba(255, 255, 0, 0.578);
+}
 
+
+/*--------------------*/
 
 /*PAGE CONTACT*/
 

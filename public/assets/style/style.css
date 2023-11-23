@@ -121,7 +121,7 @@ main {
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: rgb(225, 57, 16);
+  color: #F7F7F7;
 }
 h1 span:first-child {
   color: #F7F7F7;
@@ -146,7 +146,7 @@ h1 span:last-child {
   background-color: #7F7F7F;
   border-radius: 10px;
   padding: 1em;
-  margin-bottom: 1em;
+  margin: 2em 0;
   position: relative;
 }
 .card::before {
@@ -161,7 +161,7 @@ h1 span:last-child {
   z-index: -1;
 }
 .card form {
-  width: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -337,6 +337,28 @@ h4 {
 }
 .bloc input[type=submit]:hover {
   background-color: #7F7F7F;
+}
+
+/*--------------------*/
+/*PAGE CALENDRIER*/
+.fc-direction-ltr {
+  margin: 50px;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  background-color: #ebebeb;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #1f2c33 !important;
+}
+
+.fc th {
+  background-color: #1f2c33 !important;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: rgba(255, 255, 0, 0.578);
 }
 
 /*--------------------*/
