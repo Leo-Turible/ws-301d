@@ -283,10 +283,8 @@ h4 {
   color: $tertiary-color !important;
 }
 
-
-
 .fc .fc-daygrid-day.fc-day-today {
-  background-color: rgba(255, 255, 0, 0.578);
+  background-color: rgba(0, 255, 157, 0.5);
 }
 
 .fc .fc-toolbar-title {
@@ -298,6 +296,9 @@ h4 {
   height: 100%;
   @include flex(row, center, center, wrap);
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  &:last-child {
+    align-items: stretch;
+  }
 }
 
 #calendar {
@@ -312,7 +313,7 @@ h4 {
   padding: 10px;
   background-color: $primary-color;
   color: $tertiary-color;
-  margin: 10px;
+  margin: 50px 10px;
   opacity: 0;
   // transition: height 0.3s ease-in-out;
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -324,13 +325,17 @@ h4 {
 .show {
   // display: block !important;
   opacity: 1 !important;
-  width: max-content !important;
-  height: 100% !important;
+  max-width: 500px !important;
+  width: 100% !important;
+  height: auto !important;
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .event-info__close {
   cursor: pointer;
+  text-align: right;
+  font-size: xx-large;
+  font-weight: 900;
 }
 
 /*--------------------*/

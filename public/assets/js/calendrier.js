@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <strong>TP:</strong> ${event.extendedProps.tp || 'Non spécifié'}<br>
                         <strong>Type de Rendu:</strong> ${event.extendedProps.typeRendu || 'Non spécifié'}<br>
                     </div>
-                    <hr>
+                    <hr style="margin: 1rem 0;">
                 `;
             }).join('');
 
