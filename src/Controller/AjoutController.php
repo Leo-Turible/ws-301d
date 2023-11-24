@@ -46,7 +46,7 @@ class AjoutController extends AbstractController
 
             $this->addDataToJson($newData);
 
-            return $this->redirectToRoute('app_calendrier');
+            return $this->redirectToRoute('app_ajout');
 
         }
 
