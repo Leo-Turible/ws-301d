@@ -1,53 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}AJOUT{% endblock %}
+{% block title %}AJOUT
+{% endblock %}
 
 {% block body %}
-    <main>
-        <div class="card">
-            <h1>Ajouter une date</h1>
-            <form class="form" action="{{ path('app_ajout') }}" method="post">
-                <div class="form-group">
-                    <label for="titre">Titre</label>
-                    <input type="text" name="titre" id="titre" required>
-                </div>
+	<main>
+		<div class="card">
+			<h1>Ajouter une date</h1>
+			<form class="form" action="{{ path('app_ajout') }}" method="post">
+				<div class="form-group">
+					<label for="titre">Titre</label>
+					<input type="text" name="titre" id="titre" required>
+				</div>
 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="description" required>
-                </div>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<input type="text" name="description" id="description" required>
+				</div>
 
-                <div class="form-group">
-                    <label for="date">Date & Heure</label>
-                    <input type="datetime-local" name="date" id="date" required>
-                </div>
+				<div class="form-group">
+					<label for="date">Date & Heure</label>
+					<input type="datetime-local" name="date" id="date" required>
+				</div>
 
-                <div class="form-group">
-                    <label for="module">Module</label>
-                    <select id="module" name="_module" required>
-                        {% for module in modules %}
-                            {# Vous devriez ajuster ici pour refléter la structure réelle de vos données #}
-                            <option value="{{ module.module }}">{{ module.module }} - {{ module.nomCours }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+				<div class="form-group">
+					<label for="module">Module</label>
+					<select id="module" name="_module" required>
+						{% for module in modules %}
+							<option value="{{ module.module }}">{{ module.module }}
+								-
+								{{ module.nomCours }}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-                <div class="form-group">
-                    <label for="inputTP">TP</label>
-                    <select id="inputTP" name="_tp" required>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                    </select>
-                </div>
+				<div class="form-group">
+					<label for="typeRendu">Type de Rendu</label>
+					<select id="typeRendu" name="_typeRendu" required>
+						<option value="Partiel">Partiel</option>
+						<option value="Evaluation">Evaluation</option>
+						<option value="Rendu">Rendu</option>
+						<option value="Rendu VPS">Rendu VPS</option>
+						<option value="Rendu Moodle">Rendu Moodle</option>
+						<option value="Autre">Autre</option>
+					</select>
+				</div>
 
-                <button type="submit">Ajouter</button>
-            </form>
-        </div>
-    </main>
+
+				<div class="form-group">
+					<label for="inputTP">TP</label>
+					<select id="inputTP" name="_tp" required>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+						<option value="D">D</option>
+						<option value="E">E</option>
+						<option value="F">F</option>
+						<option value="G">G</option>
+						<option value="H">H</option>
+					</select>
+				</div>
+
+				<button type="submit">Ajouter</button>
+			</form>
+		</div>
+	</main>
 {% endblock %}

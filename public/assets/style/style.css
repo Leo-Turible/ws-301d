@@ -462,12 +462,7 @@ h4 {
   flex-wrap: wrap;
 }
 
-#calendar {
-  flex: 1;
-}
-
 #event-info {
-  flex: 1;
   border: 3px solid #101014;
   border-radius: 10px;
   padding: 10px;
@@ -484,6 +479,7 @@ h4 {
   opacity: 1 !important;
   width: max-content !important;
   height: 100% !important;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /*--------------------*/

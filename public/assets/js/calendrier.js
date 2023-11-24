@@ -1,19 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
-    var infoDiv = document.getElementById('event-info'); // Ajout de la référence à la div d'information
+    var infoDiv = document.getElementById('event-info');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         dateClick: function (info) {
-            // Convertir la date en format local
-            var formattedDate = new Intl.DateTimeFormat('fr-FR', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: false
-            }).format(info.date);
-
             // Filtrer les événements du jour
             var dayEvents = calendar.getEvents().filter(event => {
                 return event.start.getDate() === info.date.getDate();
@@ -21,8 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Construire le HTML avec les informations des événements du jour
             var eventsHtml = dayEvents.map(event => {
+                // Convertir la date du format JSON en objet Date
+                var formattedDate = new Intl.DateTimeFormat('fr-FR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: false
+                }).format(event.start);
+
                 return `
-                    <strong>Titre:</strong> ${event.title}<br>
+                    <strong>Titre:</strong> ${event.extendedProps.titre}<br>
                     <strong>Description:</strong> ${event.extendedProps.description || 'Aucune description disponible'}<br>
                     <strong>Date et Heure:</strong> ${formattedDate}<br>
                     <strong>Module:</strong> ${event.extendedProps.module} - ${event.extendedProps.nomCours}<br>
@@ -36,6 +36,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Ajouter la classe "show" à la div d'information
             infoDiv.classList.add('show');
+
+            // Ajouter le bouton "Ajouter"
+            var addButton = document.createElement('button');
+            addButton.textContent = 'Ajouter';
+            addButton.addEventListener('click', function () {
+                // Rediriger vers app_ajout
+                window.location.href = '/ajout';  // Remplacez par l'URL réelle si nécessaire
+            });
+
+            // Ajouter le bouton à la div d'information
+            infoDiv.appendChild(addButton);
         }
     });
 
@@ -53,10 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Trouver le cours correspondant dans cours.json
                 var coursModule = coursData.find(cours => cours.module === event.module);
 
-                // Convertir la date du format JSON en objet Date
-                var eventDate = new Date(event.date);
-                console.log('Date de l\'événement :', eventDate);
-
                 // Ajouter l'événement au calendrier
                 calendar.addEvent({
                     title: event.module,
@@ -64,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     backgroundColor: 'blue',  // Couleur que vous souhaitez utiliser
                     borderColor: 'blue',  // Couleur de la bordure, si nécessaire
                     extendedProps: {
+                        titre: event.titre,
                         description: event.description,
                         module: event.module,
                         nomCours: coursModule ? coursModule.nomCours : 'Cours inconnu',

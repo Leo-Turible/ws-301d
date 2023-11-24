@@ -33,6 +33,7 @@ class AjoutController extends AbstractController
             $date = $request->request->get('date');
             $module = $request->request->get('_module');
             $tp = $request->request->get('_tp');
+            $typeRendu = $request->request->get('_typeRendu'); // Nouveau champ
 
             $newData = [
                 'titre' => $titre,
@@ -40,10 +41,15 @@ class AjoutController extends AbstractController
                 'date' => $date,
                 'module' => $module,
                 'tp' => $tp,
+                'typeRendu' => $typeRendu, // Ajout du type de rendu
             ];
 
             $this->addDataToJson($newData);
+
+            return $this->redirectToRoute('app_calendrier');
+
         }
+
 
         return $this->render('ajout/index.html.twig', [
             'controller_name' => 'AjoutController',
@@ -102,6 +108,7 @@ class AjoutController extends AbstractController
         $jsonData[] = $newData;
         $this->saveDataToJson($jsonData);
     }
+
 
     private function loadDataFromJson()
     {
