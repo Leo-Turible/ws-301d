@@ -20,7 +20,7 @@ header {
 
         a {
           text-decoration: none;
-          color: $text-color;
+          color: $primary-color;
           text-transform: uppercase;
           padding: 1rem;
           @include animate(all, 0.3s);
@@ -40,10 +40,13 @@ header {
       color: $quaternary-color;
 
       &:last-child {
-        background-color: orange;
+        background-color: $primary-color;
         padding: 0.5rem;
         border-radius: 0.5rem;
       }
+    }
+    .span2{
+      color: $tertiary-color;
     }
   }
 
@@ -104,6 +107,6 @@ footer {
   padding: 15px 0;
 
   p {
-    color: $second-text-color;
+    color: $text-color;
   }
 }

@@ -7,17 +7,17 @@ $second-font: 'Montserrat', sans-serif;
 $text-size: 14px;
 $titles-size: 35px;
 
-$primary-color: #7F7F7F;
-$secondary-color: #B4B4B4;
-$tertiary-color: #F7F7F7;
+$primary-color: #2A3045;
+$secondary-color: #101014;
+$tertiary-color: #f5f5f0;
 $quaternary-color: #1f2c33;
 $quinary-color: rgb(225, 57, 16);
 
 $title-color: $tertiary-color;
 
-$text-color: $quaternary-color;
+$text-color: $tertiary-color;
 $second-text-color: $secondary-color;
-$third-text-color: $tertiary-color;
+$third-text-color: $primary-color;
 
 $base-spacing: 1em;
 $small-spacing: 0.5em;
@@ -44,7 +44,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: $tertiary-color;
-  background-color: #fff;
+  background-color: #f5f0f0;
   @include flex(column, center, center, nowrap);
 }
 

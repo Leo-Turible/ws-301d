@@ -18,8 +18,8 @@ body {
   font-family: "Outfit", sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #F7F7F7;
-  background-color: #fff;
+  color: #f5f5f0;
+  background-color: #f5f0f0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,13 +36,13 @@ h1, h2, h3, h4, h5, h6 {
 p {
   font-size: 14px;
   font-weight: 400;
-  color: #1f2c33;
+  color: #f5f5f0;
   font-family: "Montserrat", sans-serif;
 }
 
 a {
   text-decoration: none;
-  color: #1f2c33;
+  color: #f5f5f0;
   transition: all 0.3s ease-in-out;
 }
 
@@ -78,7 +78,7 @@ header nav ul {
 }
 header nav ul li a {
   text-decoration: none;
-  color: #1f2c33;
+  color: #2A3045;
   text-transform: uppercase;
   padding: 1rem;
   transition: all 0.3s ease;
@@ -93,9 +93,12 @@ header > a span {
   color: #1f2c33;
 }
 header > a span:last-child {
-  background-color: orange;
+  background-color: #2A3045;
   padding: 0.5rem;
   border-radius: 0.5rem;
+}
+header > a .span2 {
+  color: #f5f5f0;
 }
 header #header__profil {
   display: flex;
@@ -117,7 +120,7 @@ header #header__profil .menu__wrap {
   right: 0;
   width: auto;
   height: 0;
-  background-color: #7F7F7F;
+  background-color: #2A3045;
   border-radius: 10px;
   padding: 1em;
   z-index: 1000;
@@ -133,10 +136,10 @@ header #header__profil .menu__wrap::before {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #B4B4B4;
+  border-bottom: 10px solid #101014;
 }
 header #header__profil .menu__wrap a {
-  color: #F7F7F7;
+  color: #f5f5f0;
 }
 header #header__profil .menu__wrap a:hover {
   color: rgb(225, 57, 16);
@@ -155,7 +158,7 @@ footer {
   padding: 15px 0;
 }
 footer p {
-  color: #B4B4B4;
+  color: #f5f5f0;
 }
 
 main {
@@ -172,17 +175,17 @@ main {
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #F7F7F7;
+  color: #f5f5f0;
 }
 h1 span:first-child {
-  color: #F7F7F7;
+  color: #f5f5f0;
   font-weight: bolder;
 }
 h1 span:last-child {
-  background-color: orange;
+  background-color: #2A3045;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  color: #1f2c33;
+  color: #f5f5f0;
 }
 
 .card {
@@ -195,14 +198,14 @@ h1 span:last-child {
   align-items: center;
   flex-wrap: nowrap;
   gap: 35px;
-  background-color: #7F7F7F;
+  background-color: #2A3045;
   border-radius: 10px;
   padding: 1em;
   margin: 2em 0;
   position: relative;
 }
 .card p {
-  color: #F7F7F7;
+  color: #f5f5f0;
 }
 .card::before {
   content: "";
@@ -211,7 +214,7 @@ h1 span:last-child {
   right: 10px;
   width: 100%;
   height: 100%;
-  background-color: #B4B4B4;
+  background-color: #101014;
   border-radius: 10px;
   z-index: -1;
 }
@@ -238,24 +241,24 @@ h1 span:last-child {
   padding: 1em;
   border: none;
   border-radius: 10px;
-  background-color: #7F7F7F;
+  background-color: #2A3045;
   color: #1f2c33;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1px;
   outline: none;
-  border: 2px solid #F7F7F7;
+  border: 2px solid #f5f5f0;
   transition: all ease-out 0.5s;
 }
 .card form input::placeholder,
 .card form textarea::placeholder,
 .card form select::placeholder {
-  color: #B4B4B4;
+  color: #f5f5f0;
 }
 .card form input:focus,
 .card form textarea:focus,
 .card form select:focus {
-  background-color: #F7F7F7;
+  background-color: #f5f5f0;
   -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
   box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
   border-color: transparent;
@@ -269,7 +272,7 @@ h1 span:last-child {
   padding: 1em;
   border: none;
   border-radius: 10px;
-  background-color: #F7F7F7;
+  background-color: #f5f5f0;
   color: #1f2c33;
   font-size: 14px;
   font-weight: 700;
@@ -280,7 +283,7 @@ h1 span:last-child {
 }
 .card form button:hover {
   background-color: #1f2c33;
-  color: #F7F7F7;
+  color: #f5f5f0;
 }
 .card a {
   font-weight: 700;
@@ -335,9 +338,15 @@ h1 span:last-child {
   font-size: 14px;
 }
 #header_text a:hover {
-  background-color: #F7F7F7;
+  background-color: #f5f5f0;
   color: #1f2c33;
   border-color: transparent;
+}
+#header_text #header_text h1 span:first-child {
+  color: #2A3045;
+}
+#header_text #header_text h1 .span2 {
+  color: #2A3045;
 }
 #header_text .button {
   position: relative;
@@ -347,24 +356,24 @@ h1 span:last-child {
   font-size: 14px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: #F7F7F7;
+  color: #f5f5f0;
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid #F7F7F7;
+  border: 2px solid #f5f5f0;
   border-radius: 10px;
-  box-shadow: inset 0 0 0 0 #F7F7F7;
+  box-shadow: inset 0 0 0 0 #f5f5f0;
 }
 #header_text .button:hover {
   color: #1f2c33;
-  box-shadow: inset 0 -100px 0 0 #F7F7F7;
+  box-shadow: inset 0 -100px 0 0 #f5f5f0;
 }
 #header_text .button:active {
   transform: scale(0.9);
 }
 
 h4 {
-  color: #F7F7F7;
+  color: #f5f5f0;
   letter-spacing: 1.5px;
 }
 
@@ -377,11 +386,11 @@ h4 {
   box-shadow: -11px 7px 0px rgb(0, 0, 0);
   width: 450px;
   height: 500px;
-  color: #F7F7F7;
+  color: #f5f5f0;
   margin-top: 27px;
 }
 .bloc h1 {
-  color: #F7F7F7;
+  color: #f5f5f0;
 }
 .bloc .bloc__titre {
   text-align: center;
@@ -400,8 +409,8 @@ h4 {
   box-sizing: border-box;
 }
 .bloc input[type=submit] {
-  background-color: #B4B4B4;
-  color: #F7F7F7;
+  background-color: #101014;
+  color: #f5f5f0;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: calc(100% - 22px);
@@ -411,7 +420,7 @@ h4 {
   box-sizing: border-box;
 }
 .bloc input[type=submit]:hover {
-  background-color: #7F7F7F;
+  background-color: #2A3045;
 }
 
 /*--------------------*/
@@ -419,9 +428,9 @@ h4 {
 .fc-direction-ltr {
   margin: 50px;
   width: 50%;
-  border: 3px solid green;
+  border: 3px solid #101014;
   padding: 10px;
-  background-color: #ebebeb;
+  background-color: #2A3045;
 }
 
 .fc th {
@@ -433,25 +442,48 @@ h4 {
 }
 
 .fc .fc-daygrid-day-number {
-  color: #1f2c33 !important;
+  color: #f5f5f0 !important;
 }
 
 .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(255, 255, 0, 0.578);
 }
 
+.fc .fc-toolbar-title {
+  color: #f5f5f0;
+}
+
 /*--------------------*/
+/* PAGE PROFIL*/
+.card__profil__infos {
+  padding: 20px;
+}
+.card__profil__infos p {
+  color: #f5f5f0;
+  margin-bottom: 10px;
+}
+.card__profil__infos a {
+  color: #f5f5f0;
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+}
+.card__profil__infos a:hover {
+  color: #2A3045;
+}
+
+/*-------------------*/
 /*PAGE CONTACT*/
 /*--------------------*/
 /*PAGE INSCRIPTION*/
-#form-inscription {
+#form-inscription, .form {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
-#form-inscription .form-group {
+#form-inscription .form-group, .form .form-group {
   flex: 1 0 120px;
 }
 

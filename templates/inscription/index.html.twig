@@ -8,7 +8,7 @@
 
 		<div class="card">
 			<h1>Inscription</h1>
-			<form id="form-inscription" action="{{ path('app_inscription') }}" method="post">
+			<form class="form-inscription" action="{{ path('app_inscription') }}" method="post">
 				{# <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> #}
 				{# {{ form_row(form._token) }} Equivalent à la ligne ci-dessus #}
 
@@ -23,7 +23,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="inputEmail">Email</label>
+					<label for="inputEmail">Email (étudiant)</label>
 					<input type="email" id="inputEmail" name="_email" required autofocus>
 				</div>
 
