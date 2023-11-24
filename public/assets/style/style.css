@@ -455,21 +455,14 @@ h4 {
 
 /*--------------------*/
 /* PAGE PROFIL*/
-.card__profil__infos {
-  padding: 20px;
-}
-.card__profil__infos p {
+.profil__infos {
+  display: flex;
   color: #f5f5f0;
-  margin-bottom: 10px;
-}
-.card__profil__infos a {
-  color: #f5f5f0;
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-}
-.card__profil__infos a:hover {
-  color: #2A3045;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #f5f5f0;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 /*-------------------*/

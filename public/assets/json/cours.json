@@ -1,5 +1,213 @@
 [
     {
+        "module": "WR101",
+        "nomCours": "Anglais"
+    },
+    {
+        "module": "WR102",
+        "nomCours": "Anglais Renforcé"
+    },
+    {
+        "module": "WR103",
+        "nomCours": "Ergonomie et Accessibilité"
+    },
+    {
+        "module": "WR104",
+        "nomCours": "Culture numérique"
+    },
+    {
+        "module": "WR105",
+        "nomCours": "Stratégies de communication et marketing"
+    },
+    {
+        "module": "WR106",
+        "nomCours": "Expression, communication et rhétorique"
+    },
+    {
+        "module": "WR107",
+        "nomCours": "Écriture multimédia et narration"
+    },
+    {
+        "module": "WR108",
+        "nomCours": "Production graphique"
+    },
+    {
+        "module": "WR109",
+        "nomCours": "Culture artistique"
+    },
+    {
+        "module": "WR110",
+        "nomCours": "Production audio et vidéo"
+    },
+    {
+        "module": "WR112",
+        "nomCours": "Intégration"
+    },
+    {
+        "module": "WR113",
+        "nomCours": "Développement Web"
+    },
+    {
+        "module": "WR115",
+        "nomCours": "Hébergement"
+    },
+    {
+        "module": "WR116",
+        "nomCours": "Représentation et traitement de l'information"
+    },
+    {
+        "module": "WR117",
+        "nomCours": "Gestion de projet"
+    },
+    {
+        "module": "WR118",
+        "nomCours": "Économie, gestion et droit du numérique"
+    },
+    {
+        "module": "WR119",
+        "nomCours": "Projet Personnel et Professionnel"
+    },
+    {
+        "module": "WR120",
+        "nomCours": "Soutien"
+    },
+    {
+        "module": "WS101",
+        "nomCours": "Auditer une communication numérique"
+    },
+    {
+        "module": "WS102",
+        "nomCours": "Concevoir une recommandation de communication numérique"
+    },
+    {
+        "module": "WS103",
+        "nomCours": "Produire les éléments d'une communication visuelle"
+    },
+    {
+        "module": "WS104",
+        "nomCours": "Produire un contenu audio et vidéo"
+    },
+    {
+        "module": "WS105",
+        "nomCours": "Produire un site Web"
+    },
+    {
+        "module": "WS106",
+        "nomCours": "Gérer un projet de communication numérique"
+    },
+    {
+        "module": "WS107",
+        "nomCours": "Production d’un Podcast"
+    },
+    {
+        "module": "WS107",
+        "nomCours": "Production d’un Podcast"
+    },
+    {
+        "module": "WS110",
+        "nomCours": "Portfolio"
+    },
+    {
+        "module": "WR201",
+        "nomCours": "Anglais"
+    },
+    {
+        "module": "WR202",
+        "nomCours": "Anglais Renforcé"
+    },
+    {
+        "module": "WR203",
+        "nomCours": "Ergonomie et Accessibilité"
+    },
+    {
+        "module": "WR204",
+        "nomCours": "Culture numérique"
+    },
+    {
+        "module": "WR205",
+        "nomCours": "Stratégies de communication et marketing"
+    },
+    {
+        "module": "WR206",
+        "nomCours": "Expression, communication et rhétorique"
+    },
+    {
+        "module": "WR207",
+        "nomCours": "Écriture multimédia et narration"
+    },
+    {
+        "module": "WR208",
+        "nomCours": "Production graphique"
+    },
+    {
+        "module": "WR209",
+        "nomCours": "Culture artistique"
+    },
+    {
+        "module": "WR210",
+        "nomCours": "Production audio et vidéo"
+    },
+    {
+        "module": "WR211",
+        "nomCours": "Gestion de contenus"
+    },
+    {
+        "module": "WR212",
+        "nomCours": "Intégration"
+    },
+    {
+        "module": "WR213",
+        "nomCours": "Développement Web"
+    },
+    {
+        "module": "WR214",
+        "nomCours": "Système d'information"
+    },
+    {
+        "module": "WR215",
+        "nomCours": "Hébergement"
+    },
+    {
+        "module": "WR216",
+        "nomCours": "Représentation et traitement de l'information"
+    },
+    {
+        "module": "WR217",
+        "nomCours": "Gestion de projet"
+    },
+    {
+        "module": "WR218",
+        "nomCours": "Économie, gestion et droit du numérique"
+    },
+    {
+        "module": "WR219",
+        "nomCours": "Projet Personnel et Professionnel"
+    },
+    {
+        "module": "WR220",
+        "nomCours": "Soutien"
+    },
+    {
+        "module": "WS201",
+        "nomCours": "Explorer les usages du numérique"
+    },
+    {
+        "module": "WS202",
+        "nomCours": "Concevoir un produit ou un service et sa communication"
+    },
+    {
+        "module": "WS203",
+        "nomCours": "Concevoir un site web avec une source de données"
+    },
+    {
+        "module": "WS204",
+        "nomCours": "Construire sa présence en ligne"
+    },
+    {
+        "module": "WS210",
+        "nomCours": "Portfolio"
+    },
+    {
         "module": "WS301D",
         "nomCours": "Développer des parcours utilisateur au sein d'un système d'information"
     },

@@ -294,26 +294,14 @@ h4 {
 
 /* PAGE PROFIL*/
 
-.card__profil__infos {
-  padding: 20px;
-
-  p {
-      color: $text-color;
-      margin-bottom: 10px;
-
-
-  }
-
-  a {
-      color: $tertiary-color;
-      display: inline-block;
-      margin-top: 10px;
-      text-decoration: none;
-
-      &:hover {
-          color: $primary-color;
-      }
-  }
+.profil__infos{
+  display: flex;
+  color: $tertiary-color;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $tertiary-color;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 

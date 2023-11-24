@@ -5,7 +5,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -23,16 +22,11 @@ class AjoutController extends AbstractController
     #[Route('/ajout', name: 'app_ajout')]
     public function index(SessionInterface $session): Response
     {
-        // Charger les données des fichiers cours.json et users.json
-        $cours = $this->loadCoursFromJson();
-        $users = $this->loadUsersFromJson();
+        $userYear = $this->extractYearFromUser($session->get('user_email'));
 
-        // Récupérer l'année de l'utilisateur actuellement connecté
-        $userEmail = $session->get('user_email');
-        $userYear = $this->getUserYear($userEmail, $users);
-
-        // Filtrer les modules en fonction de l'année de l'utilisateur
-        $filteredModules = $this->filterModulesByYear($cours, $userYear);
+        // Vous devez ajuster cette partie en fonction de la structure réelle de vos données
+        $modules = $this->loadModulesFromJson();
+        $filteredModules = $this->filterModulesByYear($modules, $userYear);
 
         return $this->render('ajout/index.html.twig', [
             'controller_name' => 'AjoutController',
@@ -40,7 +34,26 @@ class AjoutController extends AbstractController
         ]);
     }
 
-    private function loadCoursFromJson()
+    private function extractYearFromUser($userEmail)
+    {
+        // Exemple : "BUT Semestre 3" deviendra 3
+        return preg_replace('/[^0-9]/', '', $this->findUserByEmail($userEmail)['year']);
+    }
+
+    private function findUserByEmail($email)
+    {
+        $users = $this->loadUsersFromJson();
+
+        foreach ($users as $user) {
+            if ($email === $user['email']) {
+                return $user;
+            }
+        }
+
+        return null;
+    }
+
+    private function loadModulesFromJson()
     {
         $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/cours.json');
         return $this->serializer->decode($jsonContent, 'json');
@@ -52,40 +65,20 @@ class AjoutController extends AbstractController
         return $this->serializer->decode($jsonContent, 'json');
     }
 
-    private function getUserYear($email, $users)
-    {
-        foreach ($users as $user) {
-            if ($email === $user['email']) {
-                // Récupérer l'année depuis le profil de l'utilisateur
-                return $this->extractYearFromModule($user['year']);
-            }
-        }
-
-        return null;
-    }
-
-    private function filterModulesByYear($cours, $userYear)
+    private function filterModulesByYear($modules, $userYear)
     {
         $filteredModules = [];
 
-        foreach ($cours as $module) {
-            $moduleYear = $this->extractYearFromModule($module['module']);
+        foreach ($modules as $module) {
+            // Exemple : "WS303D" deviendra 3
+            $moduleYear = preg_replace('/[^0-9]/', '', $module['module']);
 
-            // Comparer le chiffre des centaines avec celui de l'année de l'utilisateur
-            if ($moduleYear === $userYear) {
+            // Comparaison des centaines
+            if ($moduleYear >= 100 && floor($moduleYear / 100) == $userYear) {
                 $filteredModules[] = $module;
             }
         }
 
         return $filteredModules;
-    }
-
-    private function extractYearFromModule($module)
-    {
-        // Exclure la chaîne "BUT Semestre" et récupérer le chiffre à la fin
-        $cleanModule = preg_replace('/BUT Semestre (\d+)/', '$1', $module);
-
-        // Exclure les caractères non numériques
-        return (int) preg_replace('/\D/', '', $cleanModule);
     }
 }
