@@ -38,7 +38,8 @@
                 <div class="menu__wrap">
                     {% if app.session.get('user_email') is not empty %}
                         <p>{{ app.session.get('user_first_name') }} {{ app.session.get('user_last_name') }}</p>
-                        <a href="{{ path('app_profil') }}">Profil</a>
+                        <hr>
+						<a href="{{ path('app_profil') }}">Profil</a>
                         <a href="{{ path('app_logout') }}">Déconnexion</a>
                     {% else %}
                         <p>Aucun utilisateur connecté.</p>
