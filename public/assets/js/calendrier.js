@@ -134,36 +134,44 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/data.json').then(response => response.json()),
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/cours.json').then(response => response.json())
     ])
-    .then(([jsonData, coursData]) => {
+    .then(async ([jsonData, coursData]) => {
         // Fonction pour colorier les cases du calendrier
-        function colorierCases() {
+        async function colorierCases() {
             console.log('Chargement des données JSON :', jsonData);
-
+    
+            // Récupérer l'information de TP depuis le serveur avec une requête AJAX
+            const response = await fetch('/get-user-tp');
+            const data = await response.json();
+            const userTp = data.user_tp;
+    
             jsonData.forEach(function (event) {
-                // Trouver le cours correspondant dans cours.json
-                var coursModule = coursData.find(cours => cours.module === event.module);
-
-                // Ajouter l'événement au calendrier
-                calendar.addEvent({
-                    title: event.module,
-                    start: event.date,
-                    backgroundColor: 'blue',  // Couleur que vous souhaitez utiliser
-                    borderColor: 'blue',  // Couleur de la bordure, si nécessaire
-                    extendedProps: {
-                        titre: event.titre,
-                        description: event.description,
-                        module: event.module,
-                        nomCours: coursModule ? coursModule.nomCours : 'Cours inconnu',
-                        tp: event.tp,
-                        typeRendu: event.typeRendu  // Assurez-vous que cette propriété existe dans data.json
-                    }
-                });
+                // Ajouter le filtre pour ne montrer que les événements avec le même TP que l'utilisateur connecté
+                if (event.tp === userTp) {
+                    // Trouver le cours correspondant dans cours.json
+                    var coursModule = coursData.find(cours => cours.module === event.module);
+    
+                    // Ajouter l'événement au calendrier
+                    calendar.addEvent({
+                        title: event.module,
+                        start: event.date,
+                        backgroundColor: 'blue',  // Couleur que vous souhaitez utiliser
+                        borderColor: 'blue',  // Couleur de la bordure, si nécessaire
+                        extendedProps: {
+                            titre: event.titre,
+                            description: event.description,
+                            module: event.module,
+                            nomCours: coursModule ? coursModule.nomCours : 'Cours inconnu',
+                            tp: event.tp,
+                            typeRendu: event.typeRendu  // Assurez-vous que cette propriété existe dans data.json
+                        }
+                    });
+                }
             });
         }
-
+    
         // Appeler la fonction pour colorier les cases du calendrier
         colorierCases();
-
+    
         // Rendre le calendrier
         calendar.render();
     })

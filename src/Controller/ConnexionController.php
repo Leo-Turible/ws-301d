@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ConnexionController extends AbstractController
 {
@@ -61,6 +62,7 @@ class ConnexionController extends AbstractController
                     $session->set('user_email', $user['email']);
                     $session->set('user_first_name', $user['firstName']);
                     $session->set('user_last_name', $user['lastName']);
+                    $session->set('user_tp', $user['tp']);
 
                     return true;
                 } else {
@@ -84,5 +86,13 @@ class ConnexionController extends AbstractController
     public function logout()
     {
         // La méthode n'a pas besoin de contenu ici.
+    }
+
+    #[Route('/get-user-tp', name: 'get_user_tp')]
+    public function getUserTp(SessionInterface $session): JsonResponse
+    {
+        $userTp = $session->get('user_tp');
+
+        return $this->json(['user_tp' => $userTp]);
     }
 }
