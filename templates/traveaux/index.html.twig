@@ -6,11 +6,7 @@
 
 <main>
     <div class="card">
-        <h1>Traveaux</h1>
-    <h1>{% if app.session.get('email') is defined %}
-        <p>Email enregistré en session : {{ app.session.get('email') }}</p>
-    {% endif %}
-    </h1>
+        <h1>Travaux</h1>
         <form>
             Nom
             <input type="text" id="nom">
@@ -18,9 +14,7 @@
             <input type="text" id="prix">
             <button id="ajouter">Ajouter</button>
         </form>
-    </div>
-
-    <div id="panier">
+    </div> 
     
     </div>
 </main>

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var infoDiv = document.getElementById('event-info'); // Ajout de la référence à la div d'information
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        eventClick: function (info) {
+        dateClick: function (info) {
             // Convertir la date en format local
             var formattedDate = new Intl.DateTimeFormat('fr-FR', {
                 year: 'numeric',
@@ -12,16 +12,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 hour: 'numeric',
                 minute: 'numeric',
                 hour12: false
-            }).format(info.event.start);
+            }).format(info.date);
+
+            // Filtrer les événements du jour
+            var dayEvents = calendar.getEvents().filter(event => {
+                return event.start.getDate() === info.date.getDate();
+            });
+
+            // Construire le HTML avec les informations des événements du jour
+            var eventsHtml = dayEvents.map(event => {
+                return `
+                    <strong>Titre:</strong> ${event.title}<br>
+                    <strong>Description:</strong> ${event.extendedProps.description || 'Aucune description disponible'}<br>
+                    <strong>Date et Heure:</strong> ${formattedDate}<br>
+                    <strong>Module:</strong> ${event.extendedProps.module} - ${event.extendedProps.nomCours}<br>
+                    <strong>TP:</strong> ${event.extendedProps.tp || 'Non spécifié'}<br>
+                    <hr>
+                `;
+            }).join('');
 
             // Afficher les informations de l'événement dans une div
-            infoDiv.innerHTML = `
-                <strong>Titre:</strong> ${info.event.title}<br>
-                <strong>Description:</strong> ${info.event.extendedProps.description || 'Aucune description disponible'}<br>
-                <strong>Date et Heure:</strong> ${formattedDate}<br>
-                <strong>Module:</strong> ${info.event.extendedProps.module} - ${info.event.extendedProps.nomCours}<br>
-                <strong>TP:</strong> ${info.event.extendedProps.tp || 'Non spécifié'}
-            `;
+            infoDiv.innerHTML = eventsHtml;
+
+            // Ajouter la classe "show" à la div d'information
+            infoDiv.classList.add('show');
         }
     });
 
