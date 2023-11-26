@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
+                // Supprimer tous les éléments de la div event-info
+                infoDiv.innerHTML = '';
                 infoDiv.classList.remove('show');
             });
         },
@@ -97,10 +99,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.location.href = '/ajout?date=' + normalizedDate.toISOString();
             });
 
-
-
-
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
+                // Supprimer tous les éléments de la div event-info
+                infoDiv.innerHTML = '';
                 infoDiv.classList.remove('show');
             });
         }
@@ -109,6 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     infoDiv.addEventListener('click', function (event) {
         if (event.target.classList.contains('event-info__close')) {
+            // Supprimer tous les éléments de la div event-info
+            infoDiv.innerHTML = '';
             infoDiv.classList.remove('show');
         }
     });

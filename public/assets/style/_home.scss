@@ -28,6 +28,7 @@ h1 {
 .card {
   max-width: 690px;
   width: 100%;
+  min-height: 500px;
   height: auto;
   @include flex(column, center, center, nowrap);
   gap: 35px;
@@ -296,6 +297,7 @@ h4 {
   height: 100%;
   @include flex(row, center, center, wrap);
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
   &:last-child {
     align-items: stretch;
   }
@@ -307,15 +309,9 @@ h4 {
 }
 
 #event-info {
-  // flex: 1;
-  border: 3px solid $secondary-color;
-  border-radius: 10px;
-  padding: 10px;
   background-color: $primary-color;
   color: $tertiary-color;
-  margin: 50px 10px;
   opacity: 0;
-  // transition: height 0.3s ease-in-out;
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   width: 0;
   height: 0;
@@ -323,7 +319,10 @@ h4 {
 }
 
 .show {
-  // display: block !important;
+  border: 3px solid $secondary-color;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 50px 10px;
   opacity: 1 !important;
   max-width: 500px !important;
   width: 100% !important;
