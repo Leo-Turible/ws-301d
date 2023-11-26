@@ -42,8 +42,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 addButton.addEventListener('click', function () {
                     // Normaliser la date pour éviter les problèmes de fuseau horaire
                     var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
-                    window.location.href = '/ajout?date=' + normalizedDate.toISOString();
+                    var isoString = normalizedDate.toISOString().slice(0, -5);  // Supprimer les secondes et millisecondes
+                    window.location.href = '/ajout?date=' + isoString;
                 });
+                
             }
 
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
@@ -103,8 +105,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 addButton.addEventListener('click', function () {
                     // Normaliser la date pour éviter les problèmes de fuseau horaire
                     var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
-                    window.location.href = '/ajout?date=' + normalizedDate.toISOString();
+                    var isoString = normalizedDate.toISOString().slice(0, -5);  // Supprimer les secondes et millisecondes
+                    window.location.href = '/ajout?date=' + isoString;
                 });
+                
             }
 
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
