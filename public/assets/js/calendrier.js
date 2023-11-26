@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var infoDiv = document.getElementById('event-info');
+    var selectedDate; // Ajoutez cette variable pour stocker la date sélectionnée
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         eventClick: function (info) {
@@ -40,10 +42,13 @@ document.addEventListener('DOMContentLoaded', function () {
             // Ajouter la classe "show" à la div d'information
             infoDiv.classList.add('show');
 
+            // Stocker la date sélectionnée
+            selectedDate = info.event.start;
+
             // Ajouter l'événement de clic au bouton "Ajouter"
             addButton.addEventListener('click', function () {
-                // Rediriger vers app_ajout
-                window.location.href = '/ajout';  // Remplacez par l'URL réelle si nécessaire
+                // Rediriger vers app_ajout avec la date en paramètre
+                window.location.href = '/ajout?date=' + selectedDate.toISOString(); // Utilisez le format qui convient à votre application
             });
 
             // Ajouter l'événement de clic à la croix pour fermer la div
@@ -98,10 +103,13 @@ document.addEventListener('DOMContentLoaded', function () {
             // Ajouter la classe "show" à la div d'information
             infoDiv.classList.add('show');
 
+            // Stocker la date sélectionnée
+            selectedDate = info.date;
+
             // Ajouter l'événement de clic au bouton "Ajouter"
             addButton.addEventListener('click', function () {
-                // Rediriger vers app_ajout
-                window.location.href = '/ajout';  // Remplacez par l'URL réelle si nécessaire
+                // Rediriger vers app_ajout avec la date en paramètre
+                window.location.href = '/ajout?date=' + selectedDate.toISOString(); // Utilisez le format qui convient à votre application
             });
 
             // Ajouter l'événement de clic à la croix pour fermer la div
@@ -138,18 +146,18 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fonction pour colorier les cases du calendrier
         async function colorierCases() {
             console.log('Chargement des données JSON :', jsonData);
-    
+
             // Récupérer l'information de TP depuis le serveur avec une requête AJAX
             const response = await fetch('/get-user-tp');
             const data = await response.json();
             const userTp = data.user_tp;
-    
+
             jsonData.forEach(function (event) {
                 // Ajouter le filtre pour ne montrer que les événements avec le même TP que l'utilisateur connecté
                 if (event.tp === userTp) {
                     // Trouver le cours correspondant dans cours.json
                     var coursModule = coursData.find(cours => cours.module === event.module);
-    
+
                     // Ajouter l'événement au calendrier
                     calendar.addEvent({
                         title: event.module,
@@ -168,10 +176,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
-    
+
         // Appeler la fonction pour colorier les cases du calendrier
         colorierCases();
-    
+
         // Rendre le calendrier
         calendar.render();
     })

@@ -9,23 +9,28 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class AjoutController extends AbstractController
-{
+class AjoutController extends AbstractController {
     private $serializer;
 
-    public function __construct(SerializerInterface $serializer)
-    {
+    public function __construct(SerializerInterface $serializer) {
         $this->serializer = $serializer;
     }
 
     #[Route('/ajout', name: 'app_ajout')]
-    public function index(SessionInterface $session, Request $request): Response
-    {
+    public function index(SessionInterface $session, Request $request): Response {
         $userYear = $this->extractYearFromUser($session->get('user_email'));
         $modules = $this->loadModulesFromJson();
         $filteredModules = $this->filterModulesByYear($modules, $userYear);
 
-        if ($request->isMethod('POST')) {
+        $selectedDateParam = $request->query->get('date');
+        $selectedDate = null;
+
+        if($selectedDateParam) {
+            // Convertir la date passée en paramètre GET au format adapté pour datetime-local
+            $selectedDate = (new \DateTime($selectedDateParam))->format('Y-m-d\TH:i');
+        }
+
+        if($request->isMethod('POST')) {
             $titre = $request->request->get('titre');
             $description = $request->request->get('description');
             $date = $request->request->get('date');
@@ -42,7 +47,7 @@ class AjoutController extends AbstractController
                 'typeRendu' => $typeRendu, // Ajout du type de rendu
             ];
 
-            if ($this->addDataToJson($newData)) {
+            if($this->addDataToJson($newData)) {
                 $this->addFlash('success', 'Date ajoutée avec succès !');
                 return $this->redirectToRoute('app_ajout');
             } else {
@@ -53,20 +58,19 @@ class AjoutController extends AbstractController
         return $this->render('ajout/index.html.twig', [
             'controller_name' => 'AjoutController',
             'modules' => $filteredModules,
+            'selectedDate' => $selectedDate,
         ]);
     }
 
-    private function extractYearFromUser($userEmail)
-    {
+    private function extractYearFromUser($userEmail) {
         return preg_replace('/[^0-9]/', '', $this->findUserByEmail($userEmail)['year']);
     }
 
-    private function findUserByEmail($email)
-    {
+    private function findUserByEmail($email) {
         $users = $this->loadUsersFromJson();
 
-        foreach ($users as $user) {
-            if ($email === $user['email']) {
+        foreach($users as $user) {
+            if($email === $user['email']) {
                 return $user;
             }
         }
@@ -74,26 +78,23 @@ class AjoutController extends AbstractController
         return null;
     }
 
-    private function loadModulesFromJson()
-    {
-        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/cours.json');
+    private function loadModulesFromJson() {
+        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/cours.json');
         return $this->serializer->decode($jsonContent, 'json');
     }
 
-    private function loadUsersFromJson()
-    {
-        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/users.json');
+    private function loadUsersFromJson() {
+        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/users.json');
         return $this->serializer->decode($jsonContent, 'json');
     }
 
-    private function filterModulesByYear($modules, $userYear)
-    {
+    private function filterModulesByYear($modules, $userYear) {
         $filteredModules = [];
 
-        foreach ($modules as $module) {
+        foreach($modules as $module) {
             $moduleYear = preg_replace('/[^0-9]/', '', $module['module']);
 
-            if ($moduleYear >= 100 && floor($moduleYear / 100) == $userYear) {
+            if($moduleYear >= 100 && floor($moduleYear / 100) == $userYear) {
                 $filteredModules[] = $module;
             }
         }
@@ -101,8 +102,7 @@ class AjoutController extends AbstractController
         return $filteredModules;
     }
 
-    private function addDataToJson($newData)
-    {
+    private function addDataToJson($newData) {
         $jsonData = $this->loadDataFromJson();
         $jsonData[] = $newData;
         $this->saveDataToJson($jsonData);
@@ -112,15 +112,13 @@ class AjoutController extends AbstractController
         return true;
     }
 
-    private function loadDataFromJson()
-    {
-        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/data.json');
+    private function loadDataFromJson() {
+        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json');
         return $this->serializer->decode($jsonContent, 'json');
     }
 
-    private function saveDataToJson($jsonData)
-    {
+    private function saveDataToJson($jsonData) {
         $jsonContent = $this->serializer->encode($jsonData, 'json');
-        file_put_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/data.json', $jsonContent);
+        file_put_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json', $jsonContent);
     }
 }
