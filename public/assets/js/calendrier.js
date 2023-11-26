@@ -27,22 +27,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 <hr>
             `;
 
-            appendCloseButton();
+            if (info.event.start) {
+                appendCloseButton();
 
-            var addButton = document.createElement('button');
-            addButton.textContent = 'Ajouter';
+                var addButton = document.createElement('button');
+                addButton.textContent = 'Ajouter';
 
-            infoDiv.appendChild(addButton);
+                infoDiv.appendChild(addButton);
 
-            infoDiv.classList.add('show');
+                infoDiv.classList.add('show');
 
-            selectedDate = info.event.start;
+                selectedDate = info.event.start;
 
-            addButton.addEventListener('click', function () {
-                // Normaliser la date pour éviter les problèmes de fuseau horaire
-                var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
-                window.location.href = '/ajout?date=' + normalizedDate.toISOString();
-            });
+                addButton.addEventListener('click', function () {
+                    // Normaliser la date pour éviter les problèmes de fuseau horaire
+                    var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
+                    window.location.href = '/ajout?date=' + normalizedDate.toISOString();
+                });
+            }
 
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
                 // Supprimer tous les éléments de la div event-info
@@ -82,22 +84,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
             infoDiv.innerHTML = eventsHtml;
 
-            appendCloseButton();
+            if (dayEvents.length === 0) {
+                infoDiv.innerHTML += '<p>Aucun travail pour le moment</p>';
+            }
 
-            var addButton = document.createElement('button');
-            addButton.textContent = 'Ajouter';
+            if (info.date) {
+                appendCloseButton();
 
-            infoDiv.appendChild(addButton);
+                var addButton = document.createElement('button');
+                addButton.textContent = 'Ajouter';
 
-            infoDiv.classList.add('show');
+                infoDiv.appendChild(addButton);
 
-            selectedDate = info.date;
+                infoDiv.classList.add('show');
 
-            addButton.addEventListener('click', function () {
-                // Normaliser la date pour éviter les problèmes de fuseau horaire
-                var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
-                window.location.href = '/ajout?date=' + normalizedDate.toISOString();
-            });
+                selectedDate = info.date;
+
+                addButton.addEventListener('click', function () {
+                    // Normaliser la date pour éviter les problèmes de fuseau horaire
+                    var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
+                    window.location.href = '/ajout?date=' + normalizedDate.toISOString();
+                });
+            }
 
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
                 // Supprimer tous les éléments de la div event-info
