@@ -1,7 +1,5 @@
 <?php
 
-// AjoutController.php
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,12 +42,13 @@ class AjoutController extends AbstractController
                 'typeRendu' => $typeRendu, // Ajout du type de rendu
             ];
 
-            $this->addDataToJson($newData);
-
-            return $this->redirectToRoute('app_ajout');
-
+            if ($this->addDataToJson($newData)) {
+                $this->addFlash('success', 'Date ajoutée avec succès !');
+                return $this->redirectToRoute('app_ajout');
+            } else {
+                $this->addFlash('error', 'Une erreur s\'est produite. Veuillez réessayer.');
+            }
         }
-
 
         return $this->render('ajout/index.html.twig', [
             'controller_name' => 'AjoutController',
@@ -107,8 +106,11 @@ class AjoutController extends AbstractController
         $jsonData = $this->loadDataFromJson();
         $jsonData[] = $newData;
         $this->saveDataToJson($jsonData);
-    }
 
+        // Vous pouvez ajouter ici une logique de validation ou de traitement
+        // et retourner true si tout est ok, sinon false.
+        return true;
+    }
 
     private function loadDataFromJson()
     {
