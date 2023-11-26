@@ -27,8 +27,19 @@ class AjoutController extends AbstractController {
 
         if($selectedDateParam) {
             // Convertir la date passée en paramètre GET au format adapté pour datetime-local
-            $selectedDate = (new \DateTime($selectedDateParam))->format('Y-m-d\TH:i');
+            $selectedDate = new \DateTime($selectedDateParam, new \DateTimeZone('UTC')); // Utilisez le fuseau horaire UTC ici
+            $selectedDate->setTimezone(new \DateTimeZone('Europe/Paris'));
+
+            if($selectedDate === false) {
+                // Gérer l'erreur de format de date ici
+                throw new \Exception('Format de date invalide');
+            }
+
+            $selectedDate = $selectedDate->format('Y-m-d\TH:i');
         }
+
+
+
 
         if($request->isMethod('POST')) {
             $titre = $request->request->get('titre');

@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var infoDiv = document.getElementById('event-info');
-    var selectedDate; // Ajoutez cette variable pour stocker la date sélectionnée
+    var selectedDate;
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         eventClick: function (info) {
-            // Convertir la date du format JSON en objet Date
             var formattedDate = new Intl.DateTimeFormat('fr-FR', {
                 year: 'numeric',
                 month: 'long',
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 hour12: false
             }).format(info.event.start);
 
-            // Afficher les informations de l'événement dans une div
             infoDiv.innerHTML = `
                 <div class="event-info__content">
                     <strong>Titre:</strong> ${info.event.extendedProps.titre}<br>
@@ -29,42 +27,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 <hr>
             `;
 
-            // Ajouter la croix à la div d'information
             appendCloseButton();
 
-            // Ajouter le bouton "Ajouter"
             var addButton = document.createElement('button');
             addButton.textContent = 'Ajouter';
 
-            // Ajouter le bouton à la div d'information
             infoDiv.appendChild(addButton);
 
-            // Ajouter la classe "show" à la div d'information
             infoDiv.classList.add('show');
 
-            // Stocker la date sélectionnée
             selectedDate = info.event.start;
 
-            // Ajouter l'événement de clic au bouton "Ajouter"
             addButton.addEventListener('click', function () {
-                // Rediriger vers app_ajout avec la date en paramètre
-                window.location.href = '/ajout?date=' + selectedDate.toISOString(); // Utilisez le format qui convient à votre application
+                // Normaliser la date pour éviter les problèmes de fuseau horaire
+                var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
+                window.location.href = '/ajout?date=' + normalizedDate.toISOString();
             });
 
-            // Ajouter l'événement de clic à la croix pour fermer la div
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
                 infoDiv.classList.remove('show');
             });
         },
         dateClick: function (info) {
-            // Filtrer les événements du jour
             var dayEvents = calendar.getEvents().filter(event => {
                 return event.start.getDate() === info.date.getDate();
             });
 
-            // Construire le HTML avec les informations des événements du jour
+            dayEvents = sortByDateAndTime(dayEvents);
+
             var eventsHtml = dayEvents.map(event => {
-                // Convertir la date du format JSON en objet Date
                 var formattedDate = new Intl.DateTimeFormat('fr-FR', {
                     year: 'numeric',
                     month: 'long',
@@ -87,101 +78,90 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
             }).join('');
 
-            // Ajouter les informations à la div d'information (sans la croix)
             infoDiv.innerHTML = eventsHtml;
 
-            // Ajouter la croix à la div d'information
             appendCloseButton();
 
-            // Ajouter le bouton "Ajouter"
             var addButton = document.createElement('button');
             addButton.textContent = 'Ajouter';
 
-            // Ajouter le bouton à la div d'information
             infoDiv.appendChild(addButton);
 
-            // Ajouter la classe "show" à la div d'information
             infoDiv.classList.add('show');
 
-            // Stocker la date sélectionnée
             selectedDate = info.date;
 
-            // Ajouter l'événement de clic au bouton "Ajouter"
             addButton.addEventListener('click', function () {
-                // Rediriger vers app_ajout avec la date en paramètre
-                window.location.href = '/ajout?date=' + selectedDate.toISOString(); // Utilisez le format qui convient à votre application
+                // Normaliser la date pour éviter les problèmes de fuseau horaire
+                var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
+                window.location.href = '/ajout?date=' + normalizedDate.toISOString();
             });
 
-            // Ajouter l'événement de clic à la croix pour fermer la div
+
+
+
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
                 infoDiv.classList.remove('show');
             });
         }
+
     });
 
-    // Ajouter un gestionnaire d'événements délégué pour détecter les clics sur la croix
     infoDiv.addEventListener('click', function (event) {
         if (event.target.classList.contains('event-info__close')) {
             infoDiv.classList.remove('show');
         }
     });
 
-    // Fonction pour ajouter la croix à la div d'information
     function appendCloseButton() {
-        // Ajouter la croix pour fermer la div
         var closeButton = document.createElement('div');
         closeButton.innerHTML = '&times;';
         closeButton.classList.add('event-info__close');
 
-        // Ajouter la croix à la div d'information (avant les informations)
         infoDiv.insertBefore(closeButton, infoDiv.firstChild);
     }
 
-    // Charger les données JSON depuis un fichier externe
+    function sortByDateAndTime(events) {
+        return events.sort((a, b) => a.start - b.start);
+    }
+
     Promise.all([
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/data.json').then(response => response.json()),
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/cours.json').then(response => response.json())
     ])
-    .then(async ([jsonData, coursData]) => {
-        // Fonction pour colorier les cases du calendrier
-        async function colorierCases() {
-            console.log('Chargement des données JSON :', jsonData);
+        .then(async ([jsonData, coursData]) => {
+            async function colorierCases() {
+                console.log('Chargement des données JSON :', jsonData);
 
-            // Récupérer l'information de TP depuis le serveur avec une requête AJAX
-            const response = await fetch('/get-user-tp');
-            const data = await response.json();
-            const userTp = data.user_tp;
+                const response = await fetch('/get-user-tp');
+                const data = await response.json();
+                const userTp = data.user_tp;
 
-            jsonData.forEach(function (event) {
-                // Ajouter le filtre pour ne montrer que les événements avec le même TP que l'utilisateur connecté
-                if (event.tp === userTp) {
-                    // Trouver le cours correspondant dans cours.json
-                    var coursModule = coursData.find(cours => cours.module === event.module);
+                jsonData.forEach(function (event) {
+                    if (event.tp === userTp) {
+                        var coursModule = coursData.find(cours => cours.module === event.module);
 
-                    // Ajouter l'événement au calendrier
-                    calendar.addEvent({
-                        title: event.module,
-                        start: event.date,
-                        backgroundColor: 'blue',  // Couleur que vous souhaitez utiliser
-                        borderColor: 'blue',  // Couleur de la bordure, si nécessaire
-                        extendedProps: {
-                            titre: event.titre,
-                            description: event.description,
-                            module: event.module,
-                            nomCours: coursModule ? coursModule.nomCours : 'Cours inconnu',
-                            tp: event.tp,
-                            typeRendu: event.typeRendu  // Assurez-vous que cette propriété existe dans data.json
-                        }
-                    });
-                }
-            });
-        }
+                        calendar.addEvent({
+                            title: event.module,
+                            start: event.date,
+                            backgroundColor: 'blue',
+                            borderColor: 'blue',
+                            extendedProps: {
+                                titre: event.titre,
+                                description: event.description,
+                                module: event.module,
+                                nomCours: coursModule ? coursModule.nomCours : 'Cours inconnu',
+                                tp: event.tp,
+                                typeRendu: event.typeRendu
+                            }
+                        });
+                    }
+                });
+            }
 
-        // Appeler la fonction pour colorier les cases du calendrier
-        colorierCases();
+            colorierCases();
 
-        // Rendre le calendrier
-        calendar.render();
-    })
-    .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
+            calendar.render();
+        })
+        .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
 });
