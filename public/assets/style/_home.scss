@@ -89,8 +89,8 @@ h1 {
       &:focus {
         background-color: $primary-color;
         -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
-        box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.75);
-        border-color: white;
+        box-shadow: inset 0px 0px 2px 2px #ffffff;
+        border-color: transparent;
       }
     }
 
@@ -400,6 +400,52 @@ h4 {
     padding: 12px 20px;
     /* Ajustez le rembourrage selon vos besoins */
   }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .card {
+    padding: $small-spacing;
+  }
+
+  /* Ajoute d'autres styles spécifiques aux petits écrans ici */
+}
+
+// Pour les tablettes
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  body {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  .card {
+    padding: $base-spacing;
+  }
+
+  /* Ajoute d'autres styles spécifiques aux tablettes ici */
+}
+
+// Pour les écrans plus larges
+@media screen and (min-width: 1025px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  /* Ajoute d'autres styles spécifiques aux écrans larges ici */
 }
 
 

@@ -142,8 +142,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function sortByDateAndTime(events) {
-        return events.sort((a, b) => a.start - b.start);
+        return events.sort((a, b) => {
+            if (a.start < b.start) return -1;
+            if (a.start > b.start) return 1;
+            // Si les dates sont égales, comparer les heures
+            if (a.start.getHours() < b.start.getHours()) return -1;
+            if (a.start.getHours() > b.start.getHours()) return 1;
+            // Comparer les minutes si les heures sont égales
+            return a.start.getMinutes() - b.start.getMinutes();
+        });
     }
+
 
     Promise.all([
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/data.json').then(response => response.json()),

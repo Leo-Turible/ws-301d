@@ -27,7 +27,7 @@ class AjoutController extends AbstractController {
 
         if($selectedDateParam) {
             // Convertir la date passée en paramètre GET au format adapté pour datetime-local
-            $selectedDate = new \DateTime($selectedDateParam, new \DateTimeZone('Europe/Paris'));
+            $selectedDate = new \DateTime($selectedDateParam, new \DateTimeZone('Europe/Paris')); // Utilisez le fuseau horaire Europe/Paris ici
 
             if($selectedDate === false) {
                 // Gérer l'erreur de format de date ici
@@ -36,6 +36,7 @@ class AjoutController extends AbstractController {
 
             $selectedDate = $selectedDate->format('Y-m-d\TH:i:s');
         }
+
 
         $selectedTp = $request->request->get('_tp', $session->get('user_tp')); // Utiliser le TP de l'utilisateur par défaut
 
@@ -56,15 +57,12 @@ class AjoutController extends AbstractController {
                 'typeRendu' => $typeRendu, // Ajout du type de rendu
             ];
 
-            if ($this->addDataToJson($newData)) {
+            if($this->addDataToJson($newData)) {
                 $this->addFlash('success', 'Date ajoutée avec succès !');
                 return $this->redirectToRoute('app_ajout');
             } else {
                 $this->addFlash('error', 'Une erreur s\'est produite. Veuillez réessayer.');
             }
-            
-            // Réinitialiser les messages flash
-            $this->get('session')->getFlashBag()->clear();
         }
 
         return $this->render('ajout/index.html.twig', [
@@ -126,16 +124,6 @@ class AjoutController extends AbstractController {
         return true;
     }
 
-    private function loadDataFromJson() {
-        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json');
-        return $this->serializer->decode($jsonContent, 'json');
-    }
-
-    private function saveDataToJson($jsonData) {
-        $jsonContent = $this->serializer->encode($jsonData, 'json');
-        file_put_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json', $jsonContent);
-    }
-
     private function getTpOptions() {
         // Charger les données TP à partir du fichier JSON
         $jsonData = $this->loadDataFromJson();
@@ -147,5 +135,15 @@ class AjoutController extends AbstractController {
         sort($tpOptions);
 
         return $tpOptions;
+    }
+
+    private function loadDataFromJson() {
+        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json');
+        return $this->serializer->decode($jsonContent, 'json');
+    }
+
+    private function saveDataToJson($jsonData) {
+        $jsonContent = $this->serializer->encode($jsonData, 'json');
+        file_put_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json', $jsonContent);
     }
 }
