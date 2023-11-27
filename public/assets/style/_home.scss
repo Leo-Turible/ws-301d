@@ -266,7 +266,7 @@ h4 {
 /*PAGE CALENDRIER*/
 .fc-direction-ltr {
   margin: 50px;
-  width: 51.5%;
+  width: 53%;
   border: 3px solid $secondary-color;
   padding: 10px;
   background-color: $primary-color;
@@ -336,6 +336,11 @@ h4 {
   font-weight: 900;
 }
 
+.fc-event .fc-event-start .fc-event-end .fc-event-past .fc-daygrid-event .fc-daygrid-block-event .fc-h-event {
+  border: none;
+  background-color: transparent;
+}
+
 /*--------------------*/
 
 /* PAGE PROFIL*/
@@ -374,7 +379,25 @@ h4 {
 /*--------------------*/
 
 
+/*PAGE FILTRER*/
 
+.work-list {
+  list-style: none;
+  padding: 0;
+}
+
+.work-item {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  transition: text-decoration 0.3s ease;
+}
+
+.work-item.selected {
+  text-decoration: line-through;
+}
+
+/*--------------------*/
 
 /*----------------------PARTIE RESPONSIVE - MOBILE----------------------*/
 
@@ -401,6 +424,8 @@ h4 {
     /* Ajustez le rembourrage selon vos besoins */
   }
 }
+
+
 
 @media screen and (max-width: 768px) {
   body {

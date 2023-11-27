@@ -9,11 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class FiltrerController extends AbstractController
-{
+class FiltrerController extends AbstractController {
     #[Route('/filtrer', name: 'app_filtrer')]
-    public function index(Request $request, SessionInterface $session, SerializerInterface $serializer): Response
-    {
+    public function index(Request $request, SessionInterface $session, SerializerInterface $serializer): Response {
         // Récupérer les données de data.json
         $jsonData = $this->loadDataFromJson($serializer);
 
@@ -38,19 +36,24 @@ class FiltrerController extends AbstractController
         ]);
     }
 
-    private function filterData($jsonData, $selectedWeek, $selectedTp)
-    {
+    private function filterData($jsonData, $selectedWeek, $selectedTp) {
         // Filtrer les travaux en fonction de la semaine et du TP
-        return array_filter($jsonData, function ($work) use ($selectedWeek, $selectedTp) {
+        $filteredData = array_filter($jsonData, function ($work) use ($selectedWeek, $selectedTp) {
             $weekMatches = !$selectedWeek || $this->isInWeek($work['date'], $selectedWeek);
             $tpMatches = $work['tp'] == $selectedTp;
 
             return $weekMatches && $tpMatches;
         });
+
+        // Trier les données par date
+        usort($filteredData, function ($a, $b) {
+            return strtotime($a['date']) - strtotime($b['date']);
+        });
+
+        return $filteredData;
     }
 
-    private function isInWeek($date, $selectedWeek)
-    {
+    private function isInWeek($date, $selectedWeek) {
         $dateTime = new \DateTime($date);
         $week = $dateTime->format('W');
         $year = $dateTime->format('Y');
@@ -58,8 +61,7 @@ class FiltrerController extends AbstractController
         return $selectedWeek == "$year-W$week";
     }
 
-    private function getTpOptions($jsonData)
-    {
+    private function getTpOptions($jsonData) {
         // Extraire les TP uniques du jeu de données
         $tpOptions = array_unique(array_column($jsonData, 'tp'));
 
@@ -69,9 +71,8 @@ class FiltrerController extends AbstractController
         return $tpOptions;
     }
 
-    private function loadDataFromJson(SerializerInterface $serializer)
-    {
-        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/data.json');
+    private function loadDataFromJson(SerializerInterface $serializer) {
+        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json');
         return $serializer->decode($jsonContent, 'json');
     }
 
