@@ -288,6 +288,9 @@ h4 {
   color: white;
 }
 
+.fc .fc-daygrid-event-harness:hover{
+  background-color: rgba(0, 0, 0, 0.285);
+}
 .fc .fc-daygrid-day-number {
   color: $tertiary-color !important;
   margin-right: 20px;
