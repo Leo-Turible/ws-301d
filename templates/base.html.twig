@@ -10,6 +10,7 @@
 		{% block javascripts %}
 			<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
 			<script src="{{ asset('assets/js/calendrier.js') }}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 		{% endblock %}
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('assets/style/style.css') }}">
@@ -25,7 +26,7 @@
 
 			<nav>
 				<ul>
-					<li><a href="{{ path('app_home') }}">Filtrer</a></li>
+					<li><a href="{{ path('app_filtrer') }}">Filtrer</a></li>
 					<li><a href="{{ path('app_calendrier') }}">calendrier</a></li>
 					<li><a href="{{ path('app_ajout') }}">Ajouter</a></li>
 					<li><a href="{{ path('app_traveaux') }}">Travaux</a></li>

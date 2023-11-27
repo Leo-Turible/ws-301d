@@ -43,6 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Normaliser la date pour éviter les problèmes de fuseau horaire
                     var normalizedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
                     var isoString = normalizedDate.toISOString().slice(0, -5);  // Supprimer les secondes et millisecondes
+                    calendar.addEvent({
+                        title: 'Nouvel événement',
+                        start: normalizedDate,
+                        // Autres propriétés de l'événement...
+                    });
                     window.location.href = '/ajout?date=' + isoString;
                 });
                 
