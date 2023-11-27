@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         defaultTimedEventDuration: '00:01:00',
         initialView: 'dayGridMonth',
+        locale: 'fr',
         eventClick: function (info) {
             var formattedDate = new Intl.DateTimeFormat('fr-FR', {
                 year: 'numeric',
@@ -163,6 +164,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const oneWeekFromNow = new Date();
                 oneWeekFromNow.setDate(new Date().getDate() + 7); // Date d'une semaine à partir d'aujourd'hui
             
+                const threeDaysFromNow = new Date();
+                threeDaysFromNow.setDate(new Date().getDate() + 3); // Date de trois jours à partir d'aujourd'hui
+            
                 jsonData.forEach(function (event) {
                     if (event.tp === userTp) {
                         var coursModule = coursData.find(cours => cours.module === event.module);
@@ -173,7 +177,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         calendar.addEvent({
                             title: event.module,
                             start: event.date,
-                            borderColor: isEventPassed ? 'gray' : (eventDate <= oneWeekFromNow ? 'red' : 'blue'),
+                            borderColor: isEventPassed
+                                ? 'gray'
+                                : eventDate <= threeDaysFromNow
+                                ? 'red'
+                                : eventDate <= oneWeekFromNow
+                                ? 'orange'
+                                : 'blue',
                             classNames: isEventPassed ? ['event-passed'] : [], // Ajouter une classe si l'événement est passé
                             extendedProps: {
                                 titre: event.titre,
@@ -187,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             }
+            
             colorierCases();
 
             calendar.render();

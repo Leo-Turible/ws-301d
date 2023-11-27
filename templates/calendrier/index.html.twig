@@ -3,7 +3,21 @@
 {% block title %}Hello CalendrierController!
 {% endblock %}
 {% block body %}
-	<main>
+	<main id="page_calendrier">
+	<div id="legende">
+	<div class="circle_content">
+      <div class="circle red"></div>
+      <p class="texte_legende">- 3 jours |</p>
+    </div>
+    <div class="circle_content">
+      <div class="circle orange"></div>
+      <p class="texte_legende">- 7 jours |</p>
+    </div>
+    <div class="circle_content">
+      <div class="circle blue"></div>
+      <p class="texte_legende">+ 7 jours</p>
+    </div>
+  </div>
 		<section id="calendar-section">
 			<div id='calendar'></div>
 			<div id='event-info' class=''></div>

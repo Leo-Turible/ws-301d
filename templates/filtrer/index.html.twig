@@ -38,6 +38,18 @@
 					</select>
 				</div>
 
+				<div class="form-group">
+					<label for="typeRendu">Type de rendu</label>
+					<select name="typeRendu" id="typeRendu">
+						<option value="" {% if not selectedTypeRendu %} selected {% endif %}>Tous les types de rendu</option>
+						{% for typeRenduOption in typeRenduOptions %}
+							<option value="{{ typeRenduOption }}" {% if typeRenduOption == selectedTypeRendu %} selected {% endif %}>
+								{{ typeRenduOption }}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+
 
 				<button type="submit">Filtrer</button>
 			</form>

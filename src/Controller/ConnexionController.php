@@ -37,8 +37,6 @@ class ConnexionController extends AbstractController
                 return $this->redirectToRoute('app_connexion');
                 // sleep(2);
                 // return $this->redirectToRoute('app_profil');
-            } else {
-                $this->addFlash('error', 'Identification invalides !');
             }
         }
 
@@ -67,7 +65,7 @@ class ConnexionController extends AbstractController
                     return true;
                 } else {
                     // Ajoute un message d'erreur si l'e-mail n'est pas valide
-                    $this->addFlash('error', 'Adresse e-mail non autorisée.');
+                    $this->addFlash('error', 'Veuillez utiliser votre adresse URCA qui se termine par @etudiant.univ-reims.fr.');
                 }
             }
         }
