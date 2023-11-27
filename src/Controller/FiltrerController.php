@@ -18,15 +18,19 @@ class FiltrerController extends AbstractController {
         // Récupérer le TP de l'utilisateur connecté
         $userTp = $session->get('user_tp');
 
-        // Récupérer la semaine sélectionnée et le TP sélectionné
+        // Récupérer la semaine sélectionnée, le TP sélectionné et le module sélectionné
         $selectedWeek = $request->request->get('date');
         $selectedTp = $request->request->get('tp', $userTp); // Utiliser le TP de l'utilisateur par défaut
+        $selectedModule = $request->request->get('module');
 
-        // Filtrer les travaux en fonction de la semaine et du TP
-        $filteredData = $this->filterData($jsonData, $selectedWeek, $selectedTp);
+        // Filtrer les travaux en fonction de la semaine, du TP et du module
+        $filteredData = $this->filterData($jsonData, $selectedWeek, $selectedTp, $selectedModule);
 
         // Récupérer la liste des TP disponibles pour le formulaire
         $tpOptions = $this->getTpOptions($jsonData);
+
+        // Récupérer la liste des modules disponibles pour le formulaire
+        $moduleOptions = $this->getModuleOptions($jsonData);
 
         // Obtenir la date stockée dans localStorage ou utiliser la date actuelle
         $storedDate = $request->getSession()->get('stored_date');
@@ -38,16 +42,19 @@ class FiltrerController extends AbstractController {
             'tpOptions' => $tpOptions,
             'selectedTp' => $selectedTp,
             'currentWeek' => $currentWeek,
+            'moduleOptions' => $moduleOptions,
+            'selectedModule' => $selectedModule,
         ]);
     }
 
-    private function filterData($jsonData, $selectedWeek, $selectedTp) {
-        // Filtrer les travaux en fonction de la semaine et du TP
-        $filteredData = array_filter($jsonData, function ($work) use ($selectedWeek, $selectedTp) {
+    private function filterData($jsonData, $selectedWeek, $selectedTp, $selectedModule) {
+        // Filtrer les travaux en fonction de la semaine, du TP et du module
+        $filteredData = array_filter($jsonData, function ($work) use ($selectedWeek, $selectedTp, $selectedModule) {
             $weekMatches = !$selectedWeek || $this->isInWeek($work['date'], $selectedWeek);
             $tpMatches = $work['tp'] == $selectedTp;
+            $moduleMatches = !$selectedModule || $work['module'] == $selectedModule;
 
-            return $weekMatches && $tpMatches;
+            return $weekMatches && $tpMatches && $moduleMatches;
         });
 
         // Trier les données par date
@@ -74,6 +81,16 @@ class FiltrerController extends AbstractController {
         sort($tpOptions);
 
         return $tpOptions;
+    }
+
+    private function getModuleOptions($jsonData) {
+        // Extraire les modules uniques du jeu de données
+        $moduleOptions = array_unique(array_column($jsonData, 'module'));
+
+        // Trier les modules par ordre alphabétique
+        sort($moduleOptions);
+
+        return $moduleOptions;
     }
 
     private function loadDataFromJson(SerializerInterface $serializer) {

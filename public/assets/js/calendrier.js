@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var selectedDate;
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        defaultTimedEventDuration: '00:01:00',
         initialView: 'dayGridMonth',
         eventClick: function (info) {
             var formattedDate = new Intl.DateTimeFormat('fr-FR', {
@@ -160,11 +161,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 jsonData.forEach(function (event) {
                     if (event.tp === userTp) {
                         var coursModule = coursData.find(cours => cours.module === event.module);
-                        var eventDate = new Date(event.date);
-                        var isoString = eventDate.toISOString().slice(0, -5);  // Supprimer les secondes et millisecondes
+
                         calendar.addEvent({
                             title: event.module,
                             start: event.date,
+                            backgroundColor: 'blue',
+                            borderColor: 'blue',
                             extendedProps: {
                                 titre: event.titre,
                                 description: event.description,
@@ -177,7 +179,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             }
-
             colorierCases();
 
             calendar.render();

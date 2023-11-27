@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FiltrerController!
+{% block title %}Filtrer
 {% endblock %}
 
 {% block body %}
@@ -23,6 +23,19 @@
 						{% endfor %}
 					</select>
 				</div>
+
+				<div class="form-group">
+					<label for="module">Module</label>
+					<select name="module" id="module">
+						<option value="" selected>Tous les modules</option>
+						{% for moduleOption in moduleOptions %}
+							<option value="{{ moduleOption }}" {% if moduleOption == selectedModule %} selected {% endif %}>
+								{{ moduleOption }}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+
 
 				<button type="submit">Filtrer</button>
 			</form>
