@@ -530,9 +530,9 @@ h4 {
   font-weight: 900;
 }
 
-.fc-event .fc-event-start .fc-event-end .fc-event-past .fc-daygrid-event .fc-daygrid-block-event .fc-h-event {
-  border: none;
-  background-color: transparent;
+.evenement-calendrier {
+  background-color: transparent !important;
+  border: transparent !important;
 }
 
 /*--------------------*/
@@ -585,61 +585,43 @@ h4 {
 /*--------------------*/
 /*----------------------PARTIE RESPONSIVE - MOBILE----------------------*/
 @media only screen and (max-width: 767px) {
+  /* Exemples d'ajustements pour les petits écrans */
+  h1 {
+    font-size: 4rem; /* Ajuster la taille de la police */
+  }
+  .card {
+    width: 90%; /* Réduire la largeur de la carte pour les petits écrans */
+  }
   #header_text {
+    margin-left: 50px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-left: 20px;
-    margin-top: 40px;
-    margin: 40px auto;
-    padding: 20px;
-    text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
-  h4 {
-    font-size: 18px;
-    /* Ajustez la taille de la police selon vos besoins */
+  #header_text .button {
+    position: absolute;
   }
-  .button {
-    font-size: 16px;
-    /* Ajustez la taille de la police selon vos besoins */
-    padding: 12px 20px;
-    /* Ajustez le rembourrage selon vos besoins */
-  }
+  /* ... autres ajustements pour les petits écrans ... */
 }
-@media screen and (max-width: 768px) {
-  body {
-    font-size: 14px;
+/* Medium devices (tablettes) */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  /* Exemples d'ajustements pour les tablettes */
+  #header_text {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* Ajuster la marge pour les tablettes */
   }
-  h1 {
-    font-size: 2rem;
-  }
+  /* ... autres ajustements pour les tablettes ... */
+}
+/* Large devices (ordinateurs de bureau) */
+@media only screen and (min-width: 1024px) {
+  /* Exemples d'ajustements pour les grands écrans */
   .card {
-    padding: 0.5em;
+    width: 70%; /* Ajuster la largeur de la carte pour les grands écrans */
   }
-  /* Ajoute d'autres styles spécifiques aux petits écrans ici */
-}
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-  body {
-    font-size: 15px;
-  }
-  h1 {
-    font-size: 2.25rem;
-  }
-  .card {
-    padding: 1em;
-  }
-  /* Ajoute d'autres styles spécifiques aux tablettes ici */
-}
-@media screen and (min-width: 1025px) {
-  body {
-    font-size: 16px;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
-  /* Ajoute d'autres styles spécifiques aux écrans larges ici */
+  /* ... autres ajustements pour les grands écrans ... */
 }
 /*-----------------------------------------------------------------------*/
 

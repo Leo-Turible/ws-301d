@@ -28,11 +28,16 @@ class FiltrerController extends AbstractController {
         // Récupérer la liste des TP disponibles pour le formulaire
         $tpOptions = $this->getTpOptions($jsonData);
 
+        // Obtenir la date stockée dans localStorage ou utiliser la date actuelle
+        $storedDate = $request->getSession()->get('stored_date');
+        $currentWeek = $storedDate ?: (new \DateTime())->format('Y-\WW');
+
         return $this->render('filtrer/index.html.twig', [
             'controller_name' => 'FiltrerController',
             'filteredData' => $filteredData,
             'tpOptions' => $tpOptions,
             'selectedTp' => $selectedTp,
+            'currentWeek' => $currentWeek,
         ]);
     }
 

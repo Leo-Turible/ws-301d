@@ -142,17 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function sortByDateAndTime(events) {
-        return events.sort((a, b) => {
-            if (a.start < b.start) return -1;
-            if (a.start > b.start) return 1;
-            // Si les dates sont égales, comparer les heures
-            if (a.start.getHours() < b.start.getHours()) return -1;
-            if (a.start.getHours() > b.start.getHours()) return 1;
-            // Comparer les minutes si les heures sont égales
-            return a.start.getMinutes() - b.start.getMinutes();
-        });
+        return events.sort((a, b) => a.start - b.start);
     }
-
 
     Promise.all([
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/data.json').then(response => response.json()),
@@ -169,12 +160,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 jsonData.forEach(function (event) {
                     if (event.tp === userTp) {
                         var coursModule = coursData.find(cours => cours.module === event.module);
-
+                        var eventDate = new Date(event.date);
+                        var isoString = eventDate.toISOString().slice(0, -5);  // Supprimer les secondes et millisecondes
                         calendar.addEvent({
                             title: event.module,
                             start: event.date,
-                            backgroundColor: 'blue',
-                            borderColor: 'blue',
                             extendedProps: {
                                 titre: event.titre,
                                 description: event.description,
@@ -194,5 +184,3 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
 });
-
-
