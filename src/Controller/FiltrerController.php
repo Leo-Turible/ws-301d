@@ -15,6 +15,10 @@ class FiltrerController extends AbstractController {
         // Récupérer les données de data.json
         $jsonData = $this->loadDataFromJson($serializer);
 
+        // Récupérer les données de cours.json
+        $coursesJsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/cours.json');
+        $coursesData = $serializer->decode($coursesJsonContent, 'json');
+
         // Récupérer le TP de l'utilisateur connecté
         $userTp = $session->get('user_tp');
 
@@ -30,11 +34,14 @@ class FiltrerController extends AbstractController {
         $tpOptions = $this->getTpOptions($jsonData);
 
         // Récupérer la liste des modules disponibles pour le formulaire
-        $moduleOptions = $this->getModuleOptions($jsonData);
+        // $moduleOptions = $this->getModuleOptions($jsonData);
 
         // Obtenir la date stockée dans localStorage ou utiliser la date actuelle
         $storedDate = $request->getSession()->get('stored_date');
         $currentWeek = $storedDate ?: (new \DateTime())->format('Y-\WW');
+
+        // Récupérer la liste des modules disponibles pour le formulaire
+        $moduleOptions = $this->getModuleOptions($jsonData, $coursesData);
 
         return $this->render('filtrer/index.html.twig', [
             'controller_name' => 'FiltrerController',
@@ -83,20 +90,56 @@ class FiltrerController extends AbstractController {
         return $tpOptions;
     }
 
-    private function getModuleOptions($jsonData) {
+    private function getModuleOptions($jsonData, $coursesData) {
         // Extraire les modules uniques du jeu de données
         $moduleOptions = array_unique(array_column($jsonData, 'module'));
 
         // Trier les modules par ordre alphabétique
         sort($moduleOptions);
 
-        return $moduleOptions;
+        // Associer le nom du cours à chaque module
+        $moduleOptionsWithCourse = [];
+        foreach($moduleOptions as $module) {
+            $courseInfo = $this->findCourseInfo($coursesData, $module);
+            $nomCours = $courseInfo ? $courseInfo['nomCours'] : 'Nom de cours non trouvé';
+            $moduleOptionsWithCourse[$module] = ['nomCours' => $nomCours];
+        }
+
+        return $moduleOptionsWithCourse;
     }
+
 
     private function loadDataFromJson(SerializerInterface $serializer) {
         $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json');
-        return $serializer->decode($jsonContent, 'json');
+        $jsonData = $serializer->decode($jsonContent, 'json');
+
+        // Charger les informations supplémentaires du cours.json
+        $coursesJsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/cours.json');
+        $coursesData = $serializer->decode($coursesJsonContent, 'json');
+
+        // Associer les informations du cours au tableau principal
+        foreach($jsonData as &$work) {
+            $module = $work['module'] ?? null;
+            $courseInfo = $this->findCourseInfo($coursesData, $module);
+
+            if($courseInfo) {
+                $work['nomCours'] = $courseInfo['nomCours'];
+            } else {
+                $work['nomCours'] = 'Nom de cours non trouvé';
+            }
+        }
+
+        return $jsonData;
     }
 
-    // ... (les autres méthodes de votre contrôleur)
+    private function findCourseInfo($coursesData, $module) {
+        foreach($coursesData as $course) {
+            if($course['module'] === $module) {
+                return $course;
+            }
+        }
+
+        return null;
+    }
+
 }

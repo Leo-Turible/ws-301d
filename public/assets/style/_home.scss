@@ -55,6 +55,8 @@ h1 {
   }
 
   form {
+    display: flex;
+    flex: 1px;
     width: 70%;
     @include flex(column, center, center, nowrap);
     gap: $base-spacing;
@@ -264,6 +266,7 @@ h4 {
 /*--------------------*/
 
 /*PAGE CALENDRIER*/
+
 .fc-direction-ltr {
   margin: 50px;
   width: 53%;
@@ -335,10 +338,10 @@ h4 {
   font-size: xx-large;
   font-weight: 900;
 }
-.evenement-calendrier{
- background-color:transparent !important;
- border: transparent !important;  
+.event-passed {
+  opacity: 0.7; /* Vous pouvez ajuster l'opacité pour indiquer qu'il est passé */
 }
+
 
 
 /*--------------------*/
@@ -404,18 +407,34 @@ h4 {
 @media only screen and (max-width: 767px) {
   /* Exemples d'ajustements pour les petits écrans */
   h1 {
-    font-size: 4rem; /* Ajuster la taille de la police */
+    font-size: 2rem; /* Ajuster la taille de la police */
+  }
+  .card {
+    width: 85%; /* Réduire la largeur de la carte pour les petits écrans */
+  
+      form input,form textarea, form select {
+        width: 100%;
+        padding: 1em;
+        border: none;
+        border-radius: 10px;
+        background-color: #2A3045;
+        color: #1f2c33;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        outline: none;
+        border: 2px solid #f5f5f0;
+        transition: all ease-out 0.5s;
+        color: #f5f5f0;
+    }
   }
   
-  .card {
-    width: 90%; /* Réduire la largeur de la carte pour les petits écrans */
-  }
+  
   #header_text {
-    margin-left: 50px; 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    margin-left: 50px;
   }
+
+  
 
   /* ... autres ajustements pour les petits écrans ... */
 }

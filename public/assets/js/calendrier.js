@@ -151,22 +151,30 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/cours.json').then(response => response.json())
     ])
         .then(async ([jsonData, coursData]) => {
+            // ...
+
             async function colorierCases() {
                 console.log('Chargement des données JSON :', jsonData);
-
+            
                 const response = await fetch('/get-user-tp');
                 const data = await response.json();
                 const userTp = data.user_tp;
-
+            
+                const oneWeekFromNow = new Date();
+                oneWeekFromNow.setDate(new Date().getDate() + 7); // Date d'une semaine à partir d'aujourd'hui
+            
                 jsonData.forEach(function (event) {
                     if (event.tp === userTp) {
                         var coursModule = coursData.find(cours => cours.module === event.module);
-
+            
+                        const eventDate = new Date(event.date);
+                        const isEventPassed = eventDate < new Date(); // Vérifier si la date de l'événement est passée
+            
                         calendar.addEvent({
                             title: event.module,
                             start: event.date,
-                            backgroundColor: 'blue',
-                            borderColor: 'blue',
+                            borderColor: isEventPassed ? 'gray' : (eventDate <= oneWeekFromNow ? 'red' : 'blue'),
+                            classNames: isEventPassed ? ['event-passed'] : [], // Ajouter une classe si l'événement est passé
                             extendedProps: {
                                 titre: event.titre,
                                 description: event.description,

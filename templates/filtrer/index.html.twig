@@ -27,10 +27,12 @@
 				<div class="form-group">
 					<label for="module">Module</label>
 					<select name="module" id="module">
-						<option value="" selected>Tous les modules</option>
-						{% for moduleOption in moduleOptions %}
-							<option value="{{ moduleOption }}" {% if moduleOption == selectedModule %} selected {% endif %}>
-								{{ moduleOption }}
+						<option value="" {% if not selectedModule %} selected {% endif %}>Tous les modules</option>
+						{% for module, courseInfo in moduleOptions %}
+							<option value="{{ module }}" {% if module == selectedModule %} selected {% endif %}>
+								{{ module }}
+								-
+								{{ courseInfo.nomCours }}
 							</option>
 						{% endfor %}
 					</select>
@@ -53,13 +55,24 @@
 							{{ work.tp }})
 							{% if work.description is defined %}
 								<p>
-									<em>Description:</em>
-									{{ work.description }}</p>
+									<em>Description :</em>
+									{{ work.description }}
+								</p>
 							{% endif %}
 							{% if work.typeRendu is defined %}
 								<p>
-									<em>Type de rendu:</em>
-									{{ work.typeRendu }}</p>
+									<em>Type de rendu :</em>
+									{{ work.typeRendu }}
+								</p>
+							{% endif %}
+							{% if work.module is defined and work.nomCours is defined %}
+								<p>
+									<em>Module :</em>
+									{{ work.module }}
+									-
+									{{ work.nomCours }}
+								</p>
+
 							{% endif %}
 						</li>
 					{% endfor %}
@@ -67,7 +80,6 @@
 			{% else %}
 				<p>Aucun travail pour la sélection actuelle.</p>
 			{% endif %}
-
 		</div>
 	</main>
 
