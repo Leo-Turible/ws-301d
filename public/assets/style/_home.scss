@@ -38,7 +38,7 @@ h1 {
   margin: $large-spacing 0;
   position: relative;
 
-  path{
+  path {
     fill: $tertiary-color;
   }
 
@@ -60,19 +60,25 @@ h1 {
 
   form {
     display: flex;
-    flex: 1px;
     width: 70%;
-    @include flex(column, center, center, nowrap);
+    @include flex(row, center, center, wrap);
     gap: $base-spacing;
 
     .form-group {
       @include flex(column, center, start, nowrap);
+      flex: 1 0 200px;
+    }
+
+    .input[type='email'] {
+      max-width: 650px !important;
+      width: 100%;
     }
 
     input,
     textarea,
     select {
-      width: 450px;
+      // max-width: 450px;
+      width: 100%;
       padding: $base-spacing;
       border: none;
       border-radius: 10px;
@@ -128,6 +134,7 @@ h1 {
 
   a {
     font-weight: 700;
+
 
     &:hover {
       color: $quinary-color;
@@ -270,9 +277,10 @@ h4 {
 /*--------------------*/
 
 /*PAGE CALENDRIER*/
-#page_calendrier{
+#page_calendrier {
   margin: 50px;
 }
+
 .fc-direction-ltr {
   width: 53%;
   border: 3px solid $secondary-color;
@@ -288,9 +296,10 @@ h4 {
   color: white;
 }
 
-.fc .fc-daygrid-event-harness:hover{
+.fc .fc-daygrid-event-harness:hover {
   background-color: rgba(0, 0, 0, 0.285);
 }
+
 .fc .fc-daygrid-day-number {
   color: $tertiary-color !important;
   margin-right: 20px;
@@ -328,6 +337,31 @@ h4 {
   width: 0;
   height: 0;
   position: relative;
+
+  button {
+    margin: 15px auto;
+    width: 50%;
+    padding: $base-spacing;
+    border: none;
+    border-radius: 10px;
+    background-color: $tertiary-color;
+    color: $quaternary-color;
+    font-size: $text-size;
+    font-weight: 700;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+
+    &:hover {
+      background-color: $quaternary-color;
+      color: $tertiary-color;
+    }
+  }
+
+  @include flex(column, flex-start, stretch, nowrap);
+  overflow-y: scroll;
+  gap: 15px;
 }
 
 .show {
@@ -340,26 +374,34 @@ h4 {
   width: 100% !important;
   max-height: 750px;
   height: auto !important;
-  overflow-y: scroll;
 }
 
 .event-info__close {
   cursor: pointer;
-  text-align: right;
+  text-align: center;
   font-size: xx-large;
   font-weight: 900;
+  background-color: whitesmoke;
+  border-radius: 5px 5px 0 0;
+  color: black;
+  margin-bottom: 30px;
 }
+
 .event-passed {
-  opacity: 0.7; /* Vous pouvez ajuster l'opacité pour indiquer qu'il est passé */
+  opacity: 0.7;
+  /* Vous pouvez ajuster l'opacité pour indiquer qu'il est passé */
 }
-#legende{
+
+#legende {
   display: flex;
 }
-.circle_content{
+
+.circle_content {
   display: flex;
-  align-items:center ;
-  
+  align-items: center;
+
 }
+
 .circle {
   width: 10px;
   height: 10px;
@@ -378,25 +420,67 @@ h4 {
 .orange {
   background-color: orange;
 }
-.texte_legende{
+
+.texte_legende {
   color: $quaternary-color;
   font-size: 18px;
+}
+
+#event-info__content_cirlce {
+  display: flex
+}
+
+strong {
+  margin-right: 5px
 }
 
 /*--------------------*/
 
 /* PAGE PROFIL*/
 
-.profil__infos {
-  display: flex;
-  color: $tertiary-color;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid $tertiary-color;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 12px;
+
+.profil {
+  #profil {
+    @include flex(row, center, center, wrap);
+    gap: 25px;
+    width: 80%;
+
+    .profil__infos {
+      flex: 1 0 200px;
+      color: $tertiary-color;
+      border: 1px solid $tertiary-color;
+      padding: 10px;
+
+      border-radius: 10px;
+      background-color: $primary-color;
+      font-size: $text-size;
+      font-weight: 700;
+      letter-spacing: 1px;
+      outline: none;
+      border: 2px solid $tertiary-color;
+    }
+  }
+
+  a {
+    padding: $base-spacing;
+    border: none;
+    border-radius: 10px;
+    background-color: $tertiary-color;
+    color: $quaternary-color;
+    font-size: $text-size;
+    font-weight: 700;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+
+    &:hover {
+      background-color: $quaternary-color;
+      color: $tertiary-color;
+    }
+  }
 }
+
 
 
 /*-------------------*/
@@ -416,6 +500,11 @@ h4 {
 
   .form-group {
     flex: 1 0 120px;
+  }
+
+  .form-group2 {
+    width: 100%;
+
   }
 }
 
@@ -445,45 +534,50 @@ h4 {
 /*----------------------PARTIE RESPONSIVE - MOBILE----------------------*/
 
 @media only screen and (max-width: 767px) {
+
   /* Exemples d'ajustements pour les petits écrans */
   h1 {
-    font-size: 2rem; /* Ajuster la taille de la police */
+    font-size: 2rem;
+    /* Ajuster la taille de la police */
   }
+
   .card {
-    width: 85%; /* Réduire la largeur de la carte pour les petits écrans */
-  
-      form input,form textarea, form select {
-        width: 100%;
-        padding: 1em;
-        border: none;
-        border-radius: 10px;
-        background-color: #2A3045;
-        color: #1f2c33;
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        outline: none;
-        border: 2px solid #f5f5f0;
-        transition: all ease-out 0.5s;
-        color: #f5f5f0;
+    width: 85%;
+    /* Réduire la largeur de la carte pour les petits écrans */
+
+    form input,
+    form textarea,
+    form select {
+      width: 100%;
+      padding: 1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #2A3045;
+      color: #1f2c33;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      outline: none;
+      border: 2px solid #f5f5f0;
+      transition: all ease-out 0.5s;
+      color: #f5f5f0;
     }
   }
-  
-  
+
+
   #header_text {
     margin-left: 50px;
   }
-
-  
 
   /* ... autres ajustements pour les petits écrans ... */
 }
 
 /* Medium devices (tablettes) */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+
   /* Exemples d'ajustements pour les tablettes */
   #header_text {
-    margin-left: 50px; 
+    margin-left: 50px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -495,13 +589,55 @@ h4 {
 
 /* Large devices (ordinateurs de bureau) */
 @media only screen and (min-width: 1024px) {
+
   /* Exemples d'ajustements pour les grands écrans */
   .card {
-    width: 70%; /* Ajuster la largeur de la carte pour les grands écrans */
+    width: 70%;
+    /* Ajuster la largeur de la carte pour les grands écrans */
   }
 
   /* ... autres ajustements pour les grands écrans ... */
 }
+
+/*svg*/
+.svg2 {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+ }
+ 
+ .circle2 {
+  fill: none;
+  stroke: hsl(214, 97%, 59%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+ }
+ 
+ @keyframes rotate4 {
+  100% {
+   transform: rotate(360deg);
+  }
+ }
+ 
+ @keyframes dash4 {
+  0% {
+   stroke-dasharray: 1, 200;
+   stroke-dashoffset: 0;
+  }
+ 
+  50% {
+   stroke-dasharray: 90, 200;
+   stroke-dashoffset: -35px;
+  }
+ 
+  100% {
+   stroke-dashoffset: -125px;
+  }
+ }
+ 
 
 
 /*-----------------------------------------------------------------------*/

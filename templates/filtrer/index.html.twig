@@ -7,7 +7,7 @@
 	<main>
 		<div class="card">
 			<h1>Filtrer</h1>
-			<form action="{{ path('app_filtrer') }}" method="post">
+			<form id="form-filtrer" action="{{ path('app_filtrer') }}" method="post">
 				<div class="form-group">
 					<label for="date">Date</label>
 					<input type="week" name="date" id="date" value="{{ currentWeek }}">
