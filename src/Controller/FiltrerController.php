@@ -14,6 +14,11 @@ class FiltrerController extends AbstractController
     #[Route('/filtrer', name: 'app_filtrer')]
     public function index(Request $request, SessionInterface $session, SerializerInterface $serializer): Response
     {
+        // Check if the user is authenticated
+        if (!$session->has('user_email')) {
+            // Redirect to the login page or handle the unauthenticated user scenario as needed
+            return $this->redirectToRoute('app_connexion');
+        }
         // Récupérer les données de data.json
         $jsonData = $this->loadDataFromJson($serializer);
 

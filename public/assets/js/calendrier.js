@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 minute: 'numeric',
                 hour12: false
             }).format(info.event.start);
-            
-            
+
+
             var datejour = new Date();
             var deadlineDate = new Date(info.event.start);
             var millisecondsPerDay = 24 * 60 * 60 * 1000; // Nombre de millisecondes dans une journée
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 circleCouleur = 'blue';
             }
-            
+
 
             infoDiv.innerHTML = `
                 <div class="event-info__content">
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var isoString = normalizedDate.toISOString().slice(0, -5);  // Supprimer les secondes et millisecondes
                     window.location.href = '/ajout?date=' + isoString;
                 });
-                
+
             }
 
             infoDiv.querySelector('.event-info__close').addEventListener('click', function () {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    
+
 
     infoDiv.addEventListener('click', function (event) {
         if (event.target.classList.contains('event-info__close')) {
@@ -169,56 +169,56 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/data.json').then(response => response.json()),
         fetch('http://sae301.mmi-troyes.fr:8313/assets/json/cours.json').then(response => response.json())
     ])
-    .then(async ([jsonData, coursData]) => {
-        // ...
+        .then(async ([jsonData, coursData]) => {
+            // ...
 
-        async function colorierCases() {
-            console.log('Chargement des données JSON :', jsonData);
+            async function colorierCases() {
+                console.log('Chargement des données JSON :', jsonData);
 
-            const response = await fetch('/get-user-tp');
-            const data = await response.json();
-            const userTp = data.user_tp;
+                const response = await fetch('/get-user-tp');
+                const data = await response.json();
+                const userTp = data.user_tp;
 
-            const oneWeekFromNow = new Date();
-            oneWeekFromNow.setDate(new Date().getDate() + 7); // Date d'une semaine à partir d'aujourd'hui
+                const oneWeekFromNow = new Date();
+                oneWeekFromNow.setDate(new Date().getDate() + 7); // Date d'une semaine à partir d'aujourd'hui
 
-            const threeDaysFromNow = new Date();
-            threeDaysFromNow.setDate(new Date().getDate() + 3); // Date de trois jours à partir d'aujourd'hui
+                const threeDaysFromNow = new Date();
+                threeDaysFromNow.setDate(new Date().getDate() + 3); // Date de trois jours à partir d'aujourd'hui
 
-            jsonData.forEach(function (event) {
-                if (event.tp === userTp) {
-                    var coursModule = coursData.find(cours => cours.module === event.module);
+                jsonData.forEach(function (event) {
+                    if (event.tp === userTp) {
+                        var coursModule = coursData.find(cours => cours.module === event.module);
 
-                    const eventDate = new Date(event.date);
-                    const isEventPassed = eventDate < new Date(); // Vérifier si la date de l'événement est passée
+                        const eventDate = new Date(event.date);
+                        const isEventPassed = eventDate < new Date(); // Vérifier si la date de l'événement est passée
 
-                    calendar.addEvent({
-                        title: event.module,
-                        start: event.date,
-                        borderColor: isEventPassed
-                            ? 'gray'
-                            : eventDate <= threeDaysFromNow
-                            ? 'red'
-                            : eventDate <= oneWeekFromNow
-                            ? 'orange'
-                            : 'blue',
-                        classNames: isEventPassed ? ['event-passed'] : [], // Ajouter une classe si l'événement est passé
-                        extendedProps: {
-                            titre: event.titre,
-                            description: event.description,
-                            module: event.module,
-                            nomCours: coursModule ? coursModule.nomCours : 'Cours inconnu',
-                            tp: event.tp,
-                            typeRendu: event.typeRendu
-                        }
-                    });
-                }
-            });
-        }
+                        calendar.addEvent({
+                            title: event.module,
+                            start: event.date,
+                            borderColor: isEventPassed
+                                ? 'gray'
+                                : eventDate <= threeDaysFromNow
+                                    ? 'red'
+                                    : eventDate <= oneWeekFromNow
+                                        ? 'orange'
+                                        : 'blue',
+                            classNames: isEventPassed ? ['event-passed'] : [], // Ajouter une classe si l'événement est passé
+                            extendedProps: {
+                                titre: event.titre,
+                                description: event.description,
+                                module: event.module,
+                                nomCours: coursModule ? coursModule.nomCours : 'Cours inconnu',
+                                tp: event.tp,
+                                typeRendu: event.typeRendu
+                            }
+                        });
+                    }
+                });
+            }
 
-        colorierCases();
+            colorierCases();
 
-        calendar.render();
-    })
-    .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
+            calendar.render();
+        })
+        .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
 });

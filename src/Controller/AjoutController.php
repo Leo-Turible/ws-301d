@@ -15,9 +15,15 @@ class AjoutController extends AbstractController {
     public function __construct(SerializerInterface $serializer) {
         $this->serializer = $serializer;
     }
-
+    
     #[Route('/ajout', name: 'app_ajout')]
     public function index(SessionInterface $session, Request $request): Response {
+        // Check if the user is authenticated
+        if (!$session->has('user_email')) {
+            // Redirect to the login page or handle the unauthenticated user scenario as needed
+            return $this->redirectToRoute('app_connexion');
+        }
+        
         $userYear = $this->extractYearFromUser($session->get('user_email'));
         $modules = $this->loadModulesFromJson();
         $filteredModules = $this->filterModulesByYear($modules, $userYear);
