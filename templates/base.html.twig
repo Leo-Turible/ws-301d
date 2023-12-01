@@ -27,10 +27,10 @@
 
 			<nav>
     			<ul id="monMenu">
-					<li><a  class="anav" href="{{ path('app_filtrer') }}">Filtrer</a></li>
-					<li><a class="anav" href="{{ path('app_calendrier') }}">calendrier</a></li>
-					<li><a class="anav" href="{{ path('app_ajout') }}">Ajouter</a></li>
-					<li><a class="anav" href="{{ path('app_contact') }}">Contact</a></li>
+					<li><a class="anav {% if app.request.attributes.get('_route') == 'app_filtrer' %}active{% endif %}" href="{{ path('app_filtrer') }}">Filtrer</a></li>
+					<li><a class="anav {% if app.request.attributes.get('_route') == 'app_calendrier' %}active{% endif %}" href="{{ path('app_calendrier') }}">calendrier</a></li>
+					<li><a class="anav {% if app.request.attributes.get('_route') == 'app_ajout' %}active{% endif %}" href="{{ path('app_ajout') }}">Ajouter</a></li>
+					<li><a class="anav {% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}" href="{{ path('app_contact') }}">Contact</a></li>
 				</ul>
 			</nav>
 
