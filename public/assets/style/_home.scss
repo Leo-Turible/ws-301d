@@ -61,12 +61,14 @@ h1 {
   form {
     display: flex;
     width: 70%;
-    @include flex(row, center, center, wrap);
+    @include flex(column, center, wrap);
     gap: $base-spacing;
+    align-items: stretch;
+
 
     .form-group {
       @include flex(column, center, start, nowrap);
-      flex: 1 0 200px;
+      flex: 1 0 100px;
     }
 
     .input[type='email'] {
@@ -93,7 +95,7 @@ h1 {
       color: $tertiary-color;
 
       &::placeholder {
-        color: $tertiary-color;
+        color: #f5f5f06b;
       }
     }
 
