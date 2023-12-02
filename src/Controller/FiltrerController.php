@@ -9,13 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class FiltrerController extends AbstractController
-{
+class FiltrerController extends AbstractController {
     #[Route('/filtrer', name: 'app_filtrer')]
-    public function index(Request $request, SessionInterface $session, SerializerInterface $serializer): Response
-    {
+    public function index(Request $request, SessionInterface $session, SerializerInterface $serializer): Response {
         // Check if the user is authenticated
-        if (!$session->has('user_email')) {
+        if(!$session->has('user_email')) {
             // Redirect to the login page or handle the unauthenticated user scenario as needed
             return $this->redirectToRoute('app_connexion');
         }
@@ -23,7 +21,7 @@ class FiltrerController extends AbstractController
         $jsonData = $this->loadDataFromJson($serializer);
 
         // Récupérer les données de cours.json
-        $coursesJsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/cours.json');
+        $coursesJsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/cours.json');
         $coursesData = $serializer->decode($coursesJsonContent, 'json');
 
         // Récupérer le TP de l'utilisateur connecté
@@ -64,20 +62,25 @@ class FiltrerController extends AbstractController
         ]);
     }
 
-    private function filterData($jsonData, $selectedWeek, $selectedTp, $selectedModule, $selectedTypeRendu)
-    {
+    private function filterData($jsonData, $selectedWeek, $selectedTp, $selectedModule, $selectedTypeRendu) {
+        // Get the current date
+        $currentDate = new \DateTime();
+
         // Filtrer les travaux en fonction de la semaine, du TP, du module et du type de rendu
-        $filteredData = array_filter($jsonData, function ($work) use ($selectedWeek, $selectedTp, $selectedModule, $selectedTypeRendu) {
+        $filteredData = array_filter($jsonData, function ($work) use ($selectedWeek, $selectedTp, $selectedModule, $selectedTypeRendu, $currentDate) {
             $weekMatches = !$selectedWeek || $this->isInWeek($work['date'], $selectedWeek);
             $tpMatches = $work['tp'] == $selectedTp;
             $moduleMatches = !$selectedModule || $work['module'] == $selectedModule;
-        
+
             // Vérifier si la clé 'typeRendu' existe avant de l'utiliser
             $typeRenduMatches = !$selectedTypeRendu || (isset($work['typeRendu']) && $work['typeRendu'] == $selectedTypeRendu);
-        
-            return $weekMatches && $tpMatches && $moduleMatches && $typeRenduMatches;
+
+            // Check if the event date is in the future
+            $dateInFuture = new \DateTime($work['date']);
+            $dateMatches = $dateInFuture >= $currentDate;
+
+            return $weekMatches && $tpMatches && $moduleMatches && $typeRenduMatches && $dateMatches;
         });
-        
 
         // Trier les données par date
         usort($filteredData, function ($a, $b) {
@@ -87,8 +90,8 @@ class FiltrerController extends AbstractController
         return $filteredData;
     }
 
-    private function isInWeek($date, $selectedWeek)
-    {
+
+    private function isInWeek($date, $selectedWeek) {
         $dateTime = new \DateTime($date);
         $week = $dateTime->format('W');
         $year = $dateTime->format('Y');
@@ -96,8 +99,7 @@ class FiltrerController extends AbstractController
         return $selectedWeek == "$year-W$week";
     }
 
-    private function getTpOptions($jsonData)
-    {
+    private function getTpOptions($jsonData) {
         // Extraire les TP uniques du jeu de données
         $tpOptions = array_unique(array_column($jsonData, 'tp'));
 
@@ -107,8 +109,7 @@ class FiltrerController extends AbstractController
         return $tpOptions;
     }
 
-    private function getModuleOptions($jsonData, $coursesData)
-    {
+    private function getModuleOptions($jsonData, $coursesData) {
         // Extraire les modules uniques du jeu de données
         $moduleOptions = array_unique(array_column($jsonData, 'module'));
 
@@ -117,7 +118,7 @@ class FiltrerController extends AbstractController
 
         // Associer le nom du cours à chaque module
         $moduleOptionsWithCourse = [];
-        foreach ($moduleOptions as $module) {
+        foreach($moduleOptions as $module) {
             $courseInfo = $this->findCourseInfo($coursesData, $module);
             $nomCours = $courseInfo ? $courseInfo['nomCours'] : 'Nom de cours non trouvé';
             $moduleOptionsWithCourse[$module] = ['nomCours' => $nomCours];
@@ -126,8 +127,7 @@ class FiltrerController extends AbstractController
         return $moduleOptionsWithCourse;
     }
 
-    private function getTypeRenduOptions($jsonData)
-    {
+    private function getTypeRenduOptions($jsonData) {
         // Extraire les types de rendu uniques du jeu de données
         $typeRenduOptions = array_unique(array_column($jsonData, 'typeRendu'));
 
@@ -137,21 +137,20 @@ class FiltrerController extends AbstractController
         return $typeRenduOptions;
     }
 
-    private function loadDataFromJson(SerializerInterface $serializer)
-    {
-        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/data.json');
+    private function loadDataFromJson(SerializerInterface $serializer) {
+        $jsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/data.json');
         $jsonData = $serializer->decode($jsonContent, 'json');
 
         // Charger les informations supplémentaires du cours.json
-        $coursesJsonContent = file_get_contents($this->getParameter('kernel.project_dir') . '/public/assets/json/cours.json');
+        $coursesJsonContent = file_get_contents($this->getParameter('kernel.project_dir').'/public/assets/json/cours.json');
         $coursesData = $serializer->decode($coursesJsonContent, 'json');
 
         // Associer les informations du cours au tableau principal
-        foreach ($jsonData as &$work) {
+        foreach($jsonData as &$work) {
             $module = $work['module'] ?? null;
             $courseInfo = $this->findCourseInfo($coursesData, $module);
 
-            if ($courseInfo) {
+            if($courseInfo) {
                 $work['nomCours'] = $courseInfo['nomCours'];
             } else {
                 $work['nomCours'] = 'Nom de cours non trouvé';
@@ -161,10 +160,9 @@ class FiltrerController extends AbstractController
         return $jsonData;
     }
 
-    private function findCourseInfo($coursesData, $module)
-    {
-        foreach ($coursesData as $course) {
-            if ($course['module'] === $module) {
+    private function findCourseInfo($coursesData, $module) {
+        foreach($coursesData as $course) {
+            if($course['module'] === $module) {
                 return $course;
             }
         }

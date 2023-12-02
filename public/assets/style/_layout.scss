@@ -74,6 +74,8 @@ header {
       opacity: 0;
       // transition: height 0.3s ease-in-out;
       transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid $secondary-color;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
 
       p {
         color: $text-color;
@@ -155,7 +157,17 @@ footer {
   padding: 15px 0;
 
   p {
-    color: $text-color;
+    color: #F7F7F7;
+    font-weight: 700;
+
+    a {
+      color: #F7F7F7;
+      font-weight: 700;
+
+      &:hover {
+        color: $quinary-color;
+      }
+    }
   }
 }
 
@@ -165,6 +177,10 @@ footer {
 }
 
 @media only screen and (max-width: 767px) {
+
+  #header__profil {
+    display: none;
+  }
 
   a.anav {
     text-decoration: none;
